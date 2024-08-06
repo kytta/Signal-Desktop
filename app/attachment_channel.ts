@@ -2,11 +2,10 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { ipcMain, protocol } from 'electron';
-import { createReadStream } from 'node:fs';
+import { createReadStream, rmSync } from 'node:fs';
 import { join, normalize } from 'node:path';
 import { Readable, PassThrough } from 'node:stream';
 import z from 'zod';
-import * as rimraf from 'rimraf';
 import { RangeFinder, DefaultStorage } from '@indutny/range-finder';
 import {
   getAllAttachments,
@@ -303,19 +302,19 @@ export function initialize({
 
   ipcMain.handle(ERASE_TEMP_KEY, () => {
     strictAssert(tempDir != null, 'not initialized');
-    rimraf.sync(tempDir);
+    rmSync(tempDir, { recursive: true, force: true });
   });
   ipcMain.handle(ERASE_ATTACHMENTS_KEY, () => {
     strictAssert(attachmentsDir != null, 'not initialized');
-    rimraf.sync(attachmentsDir);
+    rmSync(attachmentsDir, { recursive: true, force: true });
   });
   ipcMain.handle(ERASE_STICKERS_KEY, () => {
     strictAssert(stickersDir != null, 'not initialized');
-    rimraf.sync(stickersDir);
+    rmSync(stickersDir, { recursive: true, force: true });
   });
   ipcMain.handle(ERASE_DRAFTS_KEY, () => {
     strictAssert(draftDir != null, 'not initialized');
-    rimraf.sync(draftDir);
+    rmSync(draftDir, { recursive: true, force: true });
   });
 
   ipcMain.handle(CLEANUP_ORPHANED_ATTACHMENTS_KEY, async () => {

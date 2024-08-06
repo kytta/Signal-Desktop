@@ -4,7 +4,6 @@
 import fs from 'fs/promises';
 import { pathExists } from 'fs-extra';
 import path from 'path';
-import rimraf from 'rimraf';
 import type { AfterPackContext } from 'electron-builder';
 
 export async function afterPack({
@@ -44,12 +43,12 @@ export async function afterPack({
       'Replacing electron framework symlink with real folder',
       sourcePath
     );
-    rimraf.sync(targetPath);
+    fs.rmSync(targetPath);
 
     // eslint-disable-next-line no-await-in-loop
     await fs.rename(sourcePath, targetPath);
   }
 
   console.log('Removing duplicate electron framework', versionsDir);
-  rimraf.sync(versionsDir);
+  fs.rmSync(versionsDir);
 }

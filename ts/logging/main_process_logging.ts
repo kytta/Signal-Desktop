@@ -14,6 +14,7 @@ import {
   unlinkSync,
   writeFileSync,
 } from 'fs';
+import { rm } from 'fs/promises';
 import type { BrowserWindow } from 'electron';
 import { app, ipcMain as ipc } from 'electron';
 import pino from 'pino';
@@ -21,7 +22,6 @@ import type { StreamEntry } from 'pino';
 import { filter, flatten, map, pick, sortBy } from 'lodash';
 import readFirstLine from 'firstline';
 import { read as readLastLines } from 'read-last-lines';
-import rimraf from 'rimraf';
 import { CircularBuffer } from 'cirbuf';
 
 import type { LoggerType } from '../types/Logging';
@@ -70,7 +70,7 @@ export async function initialize(
       'Failed to clean logs; deleting all. ' +
       `Error: ${Errors.toLogFormat(error)}`;
     console.error(errorString);
-    await deleteAllLogs(logPath);
+    await rm(logPath, { recursive: true, force: true });
     mkdirSync(logPath, { recursive: true });
 
     // If we want this log entry to persist on disk, we need to wait until we've
@@ -149,7 +149,7 @@ export async function initialize(
     shouldRestart = true;
 
     try {
-      await deleteAllLogs(logPath);
+      await rm(logPath, { recursive: true, force: true });
     } catch (error) {
       logger.error(`Problem deleting all logs: ${Errors.toLogFormat(error)}`);
     }
@@ -158,24 +158,6 @@ export async function initialize(
   globalLogger = logger;
 
   return log;
-}
-
-async function deleteAllLogs(logPath: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    rimraf(
-      logPath,
-      {
-        disableGlob: true,
-      },
-      error => {
-        if (error) {
-          return reject(error);
-        }
-
-        return resolve();
-      }
-    );
-  });
 }
 
 async function cleanupLogs(logPath: string) {
@@ -200,7 +182,7 @@ async function cleanupLogs(logPath: string) {
     );
 
     // delete and re-create the log directory
-    await deleteAllLogs(logPath);
+    await rm(logPath, { recursive: true, force: true });
     mkdirSync(logPath, { recursive: true });
   }
 }

@@ -2,19 +2,15 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { createReadStream } from 'fs';
-import { rename } from 'fs/promises';
+import { rename, rm } from 'fs/promises';
 import { pipeline } from 'stream/promises';
 import { createHash } from 'crypto';
-import rimraf from 'rimraf';
-import { promisify } from 'util';
 
 import * as Errors from '../types/errors';
 import type { LoggerType } from '../types/Logging';
 import * as durations from '../util/durations';
 import { isOlderThan } from '../util/timestamp';
 import { sleep } from '../util/sleep';
-
-const rimrafPromise = promisify(rimraf);
 
 export type CheckIntegrityResultType = Readonly<
   | {
@@ -130,8 +126,8 @@ export async function gracefulRimraf(
   path: string
 ): Promise<void> {
   return doGracefulFSOperation({
-    name: 'rimraf',
-    operation: rimrafPromise,
+    name: 'rm',
+    operation: async path => rm(path, { recursive: true, force: true }),
     args: [path],
     logger,
     startedAt: Date.now(),

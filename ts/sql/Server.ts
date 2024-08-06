@@ -3,9 +3,8 @@
 
 /* eslint-disable camelcase */
 
-import { mkdirSync } from 'fs';
+import { mkdirSync, rmSync } from 'fs';
 import { join } from 'path';
-import rimraf from 'rimraf';
 import { randomBytes } from 'crypto';
 import type { Database, Statement } from '@signalapp/better-sqlite3';
 import SQL from '@signalapp/better-sqlite3';
@@ -754,9 +753,9 @@ function removeDB(db: WritableDB): void {
   }
 
   logger.warn('removeDB: Removing all database files');
-  rimraf.sync(databaseFilePath);
-  rimraf.sync(`${databaseFilePath}-shm`);
-  rimraf.sync(`${databaseFilePath}-wal`);
+  rmSync(databaseFilePath, { recursive: true, force: true });
+  rmSync(`${databaseFilePath}-shm`, { recursive: true, force: true });
+  rmSync(`${databaseFilePath}-wal`, { recursive: true, force: true });
 }
 
 function removeIndexedDBFiles(_db: WritableDB): void {
@@ -767,7 +766,7 @@ function removeIndexedDBFiles(_db: WritableDB): void {
   }
 
   const pattern = join(indexedDBPath, '*.leveldb');
-  rimraf.sync(pattern);
+  rmSync(pattern, { recursive: true, force: true });
   indexedDBPath = undefined;
 }
 
