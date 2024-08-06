@@ -61,7 +61,7 @@
     "svgo": "svgo --multipass images/**/*.svg",
     "transpile": "run-p check:types build:esbuild",
     "check:types": "tsc --noEmit",
-    "clean-transpile-once": "rimraf sticker-creator/dist app/**/*.js app/*.js ts/**/*.js ts/*.js bundles tsconfig.tsbuildinfo",
+    "clean-transpile-once": "node script/clean-transpile.mjs",
     "clean-transpile": "run-s clean-transpile-once clean-transpile-once",
     "ready": "npm-run-all --print-label clean-transpile generate --parallel lint lint-deps lint-intl test-node test-electron",
     "dev": "npm run build-protobuf && cross-env SIGNAL_ENV=storybook storybook dev --port 6006",
