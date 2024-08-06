@@ -1,7 +1,7 @@
 // Copyright 2023 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateUuid } from 'uuid';
+
 
 import { isValidUuid } from '../util/isValidUuid';
 import * as log from '../logging/log';
@@ -18,7 +18,7 @@ export function isStoryDistributionId(
 }
 
 export function generateStoryDistributionId(): StoryDistributionIdString {
-  return generateUuid() as StoryDistributionIdString;
+  return crypto.randomUUID() as StoryDistributionIdString;
 }
 
 export function normalizeStoryDistributionId(

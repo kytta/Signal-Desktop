@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -23,8 +23,8 @@ describe('sql/storyReads', () => {
 
     const read: StoryReadType = {
       authorId: generateAci(),
-      conversationId: generateUuid(),
-      storyId: generateUuid(),
+      conversationId: crypto.randomUUID(),
+      storyId: crypto.randomUUID(),
       storyReadDate: Date.now(),
     };
 
@@ -41,26 +41,26 @@ describe('sql/storyReads', () => {
       const authorId = generateAci();
       const read1: StoryReadType = {
         authorId,
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now - 20,
       };
       const read2: StoryReadType = {
         authorId,
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now - 10,
       };
       const read3: StoryReadType = {
         authorId,
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now,
       };
       const read4: StoryReadType = {
         authorId: generateAci(),
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now,
       };
 
@@ -82,29 +82,29 @@ describe('sql/storyReads', () => {
     it('returns only items in provided conversation', async () => {
       const now = Date.now();
       const authorId = generateAci();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const read1: StoryReadType = {
         authorId,
         conversationId,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now - 20,
       };
       const read2: StoryReadType = {
         authorId,
         conversationId,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now - 10,
       };
       const read3: StoryReadType = {
         authorId,
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now,
       };
       const read4: StoryReadType = {
         authorId,
-        conversationId: generateUuid(),
-        storyId: generateUuid(),
+        conversationId: crypto.randomUUID(),
+        storyId: crypto.randomUUID(),
         storyReadDate: now,
       };
 

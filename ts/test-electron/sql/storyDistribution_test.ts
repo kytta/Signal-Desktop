@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -39,10 +39,10 @@ describe('sql/storyDistribution', () => {
       members: [generateAci(), generateAci()],
       senderKeyInfo: {
         createdAtDate: Date.now(),
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [],
       },
-      storageID: generateUuid(),
+      storageID: crypto.randomUUID(),
       storageVersion: 1,
       storageNeedsSync: false,
       storageUnknownFields: undefined,
@@ -76,10 +76,10 @@ describe('sql/storyDistribution', () => {
       members: [SERVICE_ID_1, SERVICE_ID_2],
       senderKeyInfo: {
         createdAtDate: Date.now(),
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [],
       },
-      storageID: generateUuid(),
+      storageID: crypto.randomUUID(),
       storageVersion: 1,
       storageNeedsSync: false,
       storageUnknownFields: undefined,
@@ -96,7 +96,7 @@ describe('sql/storyDistribution', () => {
       name: 'Updated story',
       senderKeyInfo: {
         createdAtDate: Date.now() + 10,
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [
           {
             id: 1,
@@ -130,10 +130,10 @@ describe('sql/storyDistribution', () => {
       members: [SERVICE_ID_1, SERVICE_ID_2],
       senderKeyInfo: {
         createdAtDate: Date.now(),
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [],
       },
-      storageID: generateUuid(),
+      storageID: crypto.randomUUID(),
       storageVersion: 1,
       storageNeedsSync: false,
       storageUnknownFields: undefined,
@@ -174,10 +174,10 @@ describe('sql/storyDistribution', () => {
       members: [SERVICE_ID_1, SERVICE_ID_2],
       senderKeyInfo: {
         createdAtDate: Date.now(),
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [],
       },
-      storageID: generateUuid(),
+      storageID: crypto.randomUUID(),
       storageVersion: 1,
       storageNeedsSync: false,
       storageUnknownFields: undefined,
@@ -216,10 +216,10 @@ describe('sql/storyDistribution', () => {
       members: [SERVICE_ID_1, SERVICE_ID_1, SERVICE_ID_2],
       senderKeyInfo: {
         createdAtDate: Date.now(),
-        distributionId: generateUuid(),
+        distributionId: crypto.randomUUID(),
         memberDevices: [],
       },
-      storageID: generateUuid(),
+      storageID: crypto.randomUUID(),
       storageVersion: 1,
       storageNeedsSync: false,
       storageUnknownFields: undefined,

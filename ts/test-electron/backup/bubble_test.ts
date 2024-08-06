@@ -1,7 +1,7 @@
 // Copyright 2024 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateGuid } from 'uuid';
+
 
 import { SendStatus } from '../../messages/MessageSendState';
 import type { ConversationModel } from '../../models/conversations';
@@ -66,7 +66,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -107,7 +107,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         received_at: 3,
         received_at_ms: 3,
@@ -166,7 +166,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -191,7 +191,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -216,7 +216,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -236,7 +236,7 @@ describe('backup/bubble messages', () => {
       },
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 4,
         received_at_ms: 4,
@@ -263,7 +263,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -277,7 +277,7 @@ describe('backup/bubble messages', () => {
       },
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 4,
         received_at_ms: 4,
@@ -296,7 +296,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         received_at: 3,
         received_at_ms: 3,
@@ -313,7 +313,7 @@ describe('backup/bubble messages', () => {
       },
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         received_at: 4,
         received_at_ms: 4,
@@ -335,7 +335,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         received_at: 3,
         received_at_ms: 3,
@@ -358,7 +358,7 @@ describe('backup/bubble messages', () => {
       },
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         received_at: 4,
         received_at_ms: 4,
@@ -386,7 +386,7 @@ describe('backup/bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 3,
         received_at_ms: 3,
@@ -407,7 +407,7 @@ describe('backup/bubble messages', () => {
       [
         {
           conversationId: gv1.id,
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           type: 'incoming',
           received_at: 3,
           received_at_ms: 3,

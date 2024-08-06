@@ -11,7 +11,6 @@ import {
 } from 'lodash';
 import Long from 'long';
 import type { ClientZkGroupCipher } from '@signalapp/libsignal-client/zkgroup';
-import { v4 as getGuid } from 'uuid';
 import LRU from 'lru-cache';
 import * as log from './logging/log';
 import {
@@ -333,7 +332,7 @@ const GROUP_INVITE_LINK_PASSWORD_LENGTH = 16;
 
 function generateBasicMessage(): BasicMessageType {
   return {
-    id: getGuid(),
+    id: crypto.randomUUID(),
     schemaVersion: MAX_MESSAGE_SCHEMA,
     // this is missing most properties to fulfill this type
   };

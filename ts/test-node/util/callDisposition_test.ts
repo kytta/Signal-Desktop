@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import type { PeekInfo } from '@signalapp/ringrtc';
-import uuid from 'uuid';
+
 import {
   getPeerIdFromConversation,
   getCallIdFromEra,
@@ -43,13 +43,13 @@ describe('utils/callDisposition', () => {
       assert.isNull(
         getGroupCallMeta({
           ...MOCK_PEEK_INFO_BASE,
-          creator: Buffer.from(uuidToBytes(uuid())),
+          creator: Buffer.from(uuidToBytes(crypto.randomUUID())),
         })
       );
     });
 
     it('returns group call meta when all fields are provided', () => {
-      const id = uuid();
+      const id = crypto.randomUUID();
       assert.deepStrictEqual(
         getGroupCallMeta({
           ...MOCK_PEEK_INFO_BASE,

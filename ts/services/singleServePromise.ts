@@ -1,7 +1,7 @@
 // Copyright 2022 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateUuid } from 'uuid';
+
 
 import type { ExplodePromiseResultType } from '../util/explodePromise';
 
@@ -21,10 +21,10 @@ const promises = new Map<
 export function set<T>(
   explodedPromise: ExplodePromiseResultType<T>
 ): SingleServePromiseIdString {
-  let uuid = generateUuid() as SingleServePromiseIdString;
+  let uuid = crypto.randomUUID() as SingleServePromiseIdString;
 
   while (promises.has(uuid)) {
-    uuid = generateUuid() as SingleServePromiseIdString;
+    uuid = crypto.randomUUID() as SingleServePromiseIdString;
   }
 
   promises.set(uuid, {

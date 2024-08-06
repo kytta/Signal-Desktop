@@ -6,7 +6,6 @@ import { render } from 'react-dom';
 import { batch as batchDispatch } from 'react-redux';
 import PQueue from 'p-queue';
 import pMap from 'p-map';
-import { v4 as generateUuid } from 'uuid';
 
 import * as Registration from './util/registration';
 import MessageReceiver from './textsecure/MessageReceiver';
@@ -2680,7 +2679,7 @@ export async function startApp(): Promise<void> {
     }
 
     const partialMessage: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       canReplyToStory: data.message.isStory
         ? data.message.canReplyToStory
         : undefined,
@@ -2928,7 +2927,7 @@ export async function startApp(): Promise<void> {
       `Did not receive receivedAtCounter for message: ${data.timestamp}`
     );
     const partialMessage: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       canReplyToStory: data.message.isStory
         ? data.message.canReplyToStory
         : undefined,
@@ -3305,7 +3304,7 @@ export async function startApp(): Promise<void> {
           wasSentEncrypted,
         };
         return {
-          id: generateUuid(),
+          id: crypto.randomUUID(),
           attempts: 1,
           createdAt: Date.now(),
           data,
@@ -3377,7 +3376,7 @@ export async function startApp(): Promise<void> {
           readAt,
         };
         return {
-          id: generateUuid(),
+          id: crypto.randomUUID(),
           attempts: 1,
           createdAt: Date.now(),
           data,
@@ -3449,7 +3448,7 @@ export async function startApp(): Promise<void> {
           viewedAt: envelopeTimestamp,
         };
         return {
-          id: generateUuid(),
+          id: crypto.randomUUID(),
           attempts: 1,
           createdAt: Date.now(),
           data,
@@ -3530,7 +3529,7 @@ export async function startApp(): Promise<void> {
           wasSentEncrypted,
         };
         return {
-          id: generateUuid(),
+          id: crypto.randomUUID(),
           attempts: 1,
           createdAt: Date.now(),
           data,
@@ -3565,7 +3564,7 @@ export async function startApp(): Promise<void> {
 
     const now = Date.now();
     const syncTasks = deleteForMeSync.map(item => ({
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       attempts: 1,
       createdAt: now,
       data: item,

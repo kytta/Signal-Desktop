@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as uuid } from 'uuid';
+
 import { omit } from 'lodash';
 import type { MessageReactionType } from '../../model-types.d';
 import { isEmpty } from '../../util/iterables';
@@ -16,7 +16,7 @@ import {
 } from '../../reactions/util';
 
 describe('reaction utilities', () => {
-  const OUR_CONVO_ID = uuid();
+  const OUR_CONVO_ID = crypto.randomUUID();
 
   const rxn = (
     emoji: undefined | string,
@@ -27,7 +27,7 @@ describe('reaction utilities', () => {
     targetTimestamp: Date.now(),
     timestamp: Date.now(),
     receivedAtDate: Date.now(),
-    ...(isPending ? { isSentByConversationId: { [uuid()]: false } } : {}),
+    ...(isPending ? { isSentByConversationId: { [crypto.randomUUID()]: false } } : {}),
   });
 
   describe('addOutgoingReaction', () => {
@@ -40,7 +40,7 @@ describe('reaction utilities', () => {
     it('removes all pending reactions', () => {
       const oldReactions = [
         { ...rxn('😭', { isPending: true }), timestamp: 3 },
-        { ...rxn('💬'), fromId: uuid() },
+        { ...rxn('💬'), fromId: crypto.randomUUID() },
         { ...rxn('🥀', { isPending: true }), timestamp: 1 },
         { ...rxn('🌹', { isPending: true }), timestamp: 2 },
       ];
@@ -52,7 +52,7 @@ describe('reaction utilities', () => {
 
   describe('getNewestPendingOutgoingReaction', () => {
     it('returns undefined if there are no pending outgoing reactions', () => {
-      [[], [rxn('🔔')], [rxn('😭'), { ...rxn('💬'), fromId: uuid() }]].forEach(
+      [[], [rxn('🔔')], [rxn('😭'), { ...rxn('💬'), fromId: crypto.randomUUID() }]].forEach(
         oldReactions => {
           assert.deepStrictEqual(
             getNewestPendingOutgoingReaction(oldReactions, OUR_CONVO_ID),
@@ -111,21 +111,21 @@ describe('reaction utilities', () => {
       assert(
         isEmpty(
           getUnsentConversationIds({
-            isSentByConversationId: { [uuid()]: true },
+            isSentByConversationId: { [crypto.randomUUID()]: true },
           })
         )
       );
     });
 
     it('returns an iterable of all unsent conversation IDs', () => {
-      const unsent1 = uuid();
-      const unsent2 = uuid();
+      const unsent1 = crypto.randomUUID();
+      const unsent2 = crypto.randomUUID();
       const fakeReaction = {
         isSentByConversationId: {
           [unsent1]: false,
           [unsent2]: false,
-          [uuid()]: true,
-          [uuid()]: true,
+          [crypto.randomUUID()]: true,
+          [crypto.randomUUID()]: true,
         },
       };
 
@@ -140,7 +140,7 @@ describe('reaction utilities', () => {
     const fullySent = rxn('⭐️');
     const partiallySent = {
       ...rxn('🔥'),
-      isSentByConversationId: { [uuid()]: true, [uuid()]: false },
+      isSentByConversationId: { [crypto.randomUUID()]: true, [crypto.randomUUID()]: false },
     };
     const unsent = rxn('🤫', { isPending: true });
 
@@ -174,9 +174,9 @@ describe('reaction utilities', () => {
   });
 
   describe('markOutgoingReactionSent', () => {
-    const uuid1 = uuid();
-    const uuid2 = uuid();
-    const uuid3 = uuid();
+    const uuid1 = crypto.randomUUID();
+    const uuid2 = crypto.randomUUID();
+    const uuid3 = crypto.randomUUID();
 
     const star = {
       ...rxn('⭐️'),
@@ -203,7 +203,7 @@ describe('reaction utilities', () => {
       const result = markOutgoingReactionSent(
         reactions,
         rxn('🥀', { isPending: true }),
-        [uuid()]
+        [crypto.randomUUID()]
       );
       assert.deepStrictEqual(result, reactions);
     });

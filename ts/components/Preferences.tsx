@@ -12,7 +12,6 @@ import React, {
 } from 'react';
 import { noop, partition } from 'lodash';
 import classNames from 'classnames';
-import uuid from 'uuid';
 import * as LocaleMatcher from '@formatjs/intl-localematcher';
 
 import type { MediaDeviceSettings } from '../types/Calling';
@@ -1738,7 +1737,7 @@ function SettingsRadio<Enum>({
   onChange: (value: Enum) => void;
 }): JSX.Element {
   const htmlIds = useMemo(() => {
-    return Array.from({ length: options.length }, () => uuid());
+    return Array.from({ length: options.length }, () => crypto.randomUUID());
   }, [options.length]);
 
   return (

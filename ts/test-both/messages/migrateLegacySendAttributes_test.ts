@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as uuid } from 'uuid';
+
 import { getDefaultConversation } from '../helpers/getDefaultConversation';
 import type { ConversationType } from '../../state/ducks/conversations';
 import { SendStatus } from '../../messages/MessageSendState';
@@ -34,7 +34,7 @@ describe('migrateLegacySendAttributes', () => {
   };
 
   it("doesn't migrate messages that already have the modern send state", () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
     const message = {
       ...defaultMessage,
       sendStateByConversationId: {
@@ -52,7 +52,7 @@ describe('migrateLegacySendAttributes', () => {
   });
 
   it("doesn't migrate messages that aren't outgoing", () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
     const message = {
       ...defaultMessage,
       type: 'incoming' as const,

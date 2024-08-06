@@ -3,7 +3,6 @@
 
 import { debounce, pick, uniq, without } from 'lodash';
 import PQueue from 'p-queue';
-import { v4 as generateUuid } from 'uuid';
 import { batch as batchDispatch } from 'react-redux';
 
 import type {
@@ -289,7 +288,7 @@ export class ConversationController {
       return conversation;
     }
 
-    const id = generateUuid();
+    const id = crypto.randomUUID();
 
     if (type === 'group') {
       conversation = this._conversations.add({

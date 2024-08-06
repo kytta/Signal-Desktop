@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import noop from 'lodash/noop';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataWriter } from '../sql/Client';
 import type { ReactionAttributesType } from '../messageModifiers/Reactions';
@@ -89,7 +89,7 @@ export async function enqueueReactionForSend({
   // Only used in story scenarios, where we use a whole message to represent the reaction
   const storyReactionMessage = storyMessage
     ? new window.Whisper.Message({
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         type: 'outgoing',
         conversationId: targetConversation.id,
         sent_at: timestamp,
@@ -114,7 +114,7 @@ export async function enqueueReactionForSend({
     : undefined;
 
   const reaction: ReactionAttributesType = {
-    envelopeId: generateUuid(),
+    envelopeId: crypto.randomUUID(),
     removeFromMessageReceiverCache: noop,
     emoji,
     fromId: window.ConversationController.getOurConversationIdOrThrow(),

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -21,10 +21,10 @@ describe('sql/searchMessages', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1 - generic string',
       type: 'outgoing',
       conversationId,
@@ -33,7 +33,7 @@ describe('sql/searchMessages', () => {
       timestamp: now - 20,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2 - unique string',
       type: 'outgoing',
       conversationId,
@@ -42,7 +42,7 @@ describe('sql/searchMessages', () => {
       timestamp: now - 10,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3 - generic string',
       type: 'outgoing',
       conversationId,
@@ -75,10 +75,10 @@ describe('sql/searchMessages', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1 - unique string',
       type: 'outgoing',
       conversationId,
@@ -87,7 +87,7 @@ describe('sql/searchMessages', () => {
       timestamp: now - 20,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2 - unique string',
       type: 'outgoing',
       conversationId,
@@ -97,7 +97,7 @@ describe('sql/searchMessages', () => {
       isViewOnce: true,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3 - generic string',
       type: 'outgoing',
       conversationId,
@@ -130,10 +130,10 @@ describe('sql/searchMessages', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1 - unique string',
       type: 'outgoing',
       conversationId,
@@ -142,24 +142,24 @@ describe('sql/searchMessages', () => {
       timestamp: now - 20,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2 - unique string',
       type: 'outgoing',
       conversationId,
       sent_at: now - 10,
       received_at: now - 10,
       timestamp: now - 10,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3 - generic string',
       type: 'outgoing',
       conversationId,
       sent_at: now,
       received_at: now,
       timestamp: now,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
 
     await saveMessages([message1, message2, message3], {
@@ -185,12 +185,12 @@ describe('sql/searchMessages', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
-    const otherConversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
+    const otherConversationId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1 - unique string',
       type: 'outgoing',
       conversationId,
@@ -199,7 +199,7 @@ describe('sql/searchMessages', () => {
       timestamp: now - 20,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2 - unique string',
       type: 'outgoing',
       conversationId: otherConversationId,
@@ -238,13 +238,13 @@ describe('sql/searchMessages/withMentions', () => {
     const now = Date.now();
     const messages: Array<MessageAttributesType> = messageOverrides.map(
       (overrides, idx) => ({
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: ' ',
         type: 'incoming',
         sent_at: now - idx,
         received_at: now - idx,
         timestamp: now - idx,
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         ...overrides,
       })
     );
@@ -336,7 +336,7 @@ describe('sql/searchMessages/withMentions', () => {
   });
   it('respects conversationId for mention matches', async () => {
     const mentionedAcis = [generateAci(), generateAci()];
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const messages = await storeMessages([
       {
         body: 'cat',

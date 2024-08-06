@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -21,13 +21,13 @@ describe('sql/getRecentStoryReplies', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId1 = generateUuid();
-    const conversationId2 = generateUuid();
-    const conversationId3 = generateUuid();
+    const conversationId1 = crypto.randomUUID();
+    const conversationId2 = crypto.randomUUID();
+    const conversationId3 = crypto.randomUUID();
     const ourAci = generateAci();
-    const storyId = generateUuid();
+    const storyId = crypto.randomUUID();
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1 - reply #1',
       type: 'incoming',
       conversationId: conversationId1,
@@ -37,7 +37,7 @@ describe('sql/getRecentStoryReplies', () => {
       storyId,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2 - reply #2',
       type: 'incoming',
       conversationId: conversationId2,
@@ -47,7 +47,7 @@ describe('sql/getRecentStoryReplies', () => {
       storyId,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3 - reply #3',
       type: 'incoming',
       conversationId: conversationId3,
@@ -57,7 +57,7 @@ describe('sql/getRecentStoryReplies', () => {
       storyId,
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4 - the story itself',
       type: 'story',
       conversationId: conversationId3,
@@ -67,17 +67,17 @@ describe('sql/getRecentStoryReplies', () => {
       storyId,
     };
     const message5: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5 - different story reply',
       type: 'incoming',
       conversationId: conversationId1,
       sent_at: now,
       received_at: now,
       timestamp: now,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message6: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 6 - no story fields',
       type: 'incoming',
       conversationId: conversationId1,

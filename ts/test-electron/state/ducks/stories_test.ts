@@ -3,7 +3,7 @@
 
 import * as sinon from 'sinon';
 import casual from 'casual';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataWriter } from '../../../sql/Client';
 import type {
@@ -38,7 +38,7 @@ describe('both/state/ducks/stories', () => {
     const now = Date.now();
 
     return {
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       id,
       received_at: now,
       sent_at: now,
@@ -71,7 +71,7 @@ describe('both/state/ducks/stories', () => {
 
     function getStoryData(
       messageId: string,
-      conversationId = generateUuid(),
+      conversationId = crypto.randomUUID(),
       timestampDelta = 0
     ): StoryDataType {
       const now = Date.now();
@@ -132,7 +132,7 @@ describe('both/state/ducks/stories', () => {
       const dispatch = sinon.spy();
 
       viewStory({
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         storyViewMode: StoryViewModeType.Single,
         viewDirection: StoryViewDirectionType.Next,
       })(dispatch, getEmptyRootState, null);
@@ -146,7 +146,7 @@ describe('both/state/ducks/stories', () => {
     it('does not find a story', () => {
       const dispatch = sinon.spy();
       viewStory({
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         storyViewMode: StoryViewModeType.All,
       })(dispatch, getEmptyRootState, null);
 
@@ -157,7 +157,7 @@ describe('both/state/ducks/stories', () => {
     });
 
     it('selects a specific story', () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
 
       const getState = getStateFunction([getStoryData(storyId)]);
 
@@ -182,10 +182,10 @@ describe('both/state/ducks/stories', () => {
 
     describe("navigating within a user's stories", () => {
       it('selects the next story', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId = crypto.randomUUID();
         const getState = getStateFunction([
           getStoryData(storyId1, conversationId),
           getStoryData(storyId2, conversationId),
@@ -212,10 +212,10 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('selects the prev story', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId = crypto.randomUUID();
         const getState = getStateFunction([
           getStoryData(storyId1, conversationId),
           getStoryData(storyId2, conversationId),
@@ -242,10 +242,10 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('when in StoryViewModeType.User and we have reached the end, it closes the viewer', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId = crypto.randomUUID();
         const getState = getStateFunction([
           getStoryData(storyId1, conversationId),
           getStoryData(storyId2, conversationId),
@@ -268,12 +268,12 @@ describe('both/state/ducks/stories', () => {
 
     describe('unviewed stories', () => {
       it('does not select hidden stories', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId = crypto.randomUUID();
         const conversationAci = generateAci();
-        const conversationIdHide = generateUuid();
+        const conversationIdHide = crypto.randomUUID();
         const conversationAciHide = generateAci();
 
         const getState = getStateFunction(
@@ -321,13 +321,13 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('does not select stories that precede the currently viewed story', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const storyId4 = generateUuid();
-        const conversationId1 = generateUuid();
-        const conversationId2 = generateUuid();
-        const conversationId3 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const storyId4 = crypto.randomUUID();
+        const conversationId1 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
+        const conversationId3 = crypto.randomUUID();
 
         // conversationId3 - storyId4
         // conversationId1 - storyId1, storyId3
@@ -364,13 +364,13 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('correctly goes to previous unviewed story', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const storyId4 = generateUuid();
-        const conversationId1 = generateUuid();
-        const conversationId2 = generateUuid();
-        const conversationId3 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const storyId4 = crypto.randomUUID();
+        const conversationId1 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
+        const conversationId3 = crypto.randomUUID();
 
         const unviewedStoryConversationIdsSorted = [
           conversationId3,
@@ -416,13 +416,13 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('does not close the viewer when playing the next story', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const storyId4 = generateUuid();
-        const conversationId1 = generateUuid();
-        const conversationId2 = generateUuid();
-        const conversationId3 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const storyId4 = crypto.randomUUID();
+        const conversationId1 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
+        const conversationId3 = crypto.randomUUID();
         const unviewedStoryConversationIdsSorted = [
           conversationId3,
           conversationId2,
@@ -466,11 +466,11 @@ describe('both/state/ducks/stories', () => {
       });
 
       it('closes the viewer when there are no more unviewed stories', () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
 
-        const conversationId1 = generateUuid();
-        const conversationId2 = generateUuid();
+        const conversationId1 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
 
         const getState = getStateFunction(
           [
@@ -527,8 +527,8 @@ describe('both/state/ducks/stories', () => {
           ],
         };
 
-        const ourConversationId = generateUuid();
-        const groupConversationId = generateUuid();
+        const ourConversationId = crypto.randomUUID();
+        const groupConversationId = crypto.randomUUID();
 
         function getMyStoryData(
           messageId: string,
@@ -553,11 +553,11 @@ describe('both/state/ducks/stories', () => {
           };
         }
 
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const storyId4 = generateUuid();
-        const storyId5 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const storyId4 = crypto.randomUUID();
+        const storyId5 = crypto.randomUUID();
         const myStories = [
           getMyStoryData(storyId1, distributionListId1, 5),
           getMyStoryData(storyId2, distributionListId2, 4),
@@ -780,11 +780,11 @@ describe('both/state/ducks/stories', () => {
       }
 
       it("goes to the next user's stories", () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId2 = generateUuid();
-        const conversationId1 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
+        const conversationId1 = crypto.randomUUID();
         const getState = getStateFunction(
           [
             getViewedStoryData(storyId1, conversationId1, 0),
@@ -817,11 +817,11 @@ describe('both/state/ducks/stories', () => {
       });
 
       it("goes to the prev user's stories", () => {
-        const storyId1 = generateUuid();
-        const storyId2 = generateUuid();
-        const storyId3 = generateUuid();
-        const conversationId1 = generateUuid();
-        const conversationId2 = generateUuid();
+        const storyId1 = crypto.randomUUID();
+        const storyId2 = crypto.randomUUID();
+        const storyId3 = crypto.randomUUID();
+        const conversationId1 = crypto.randomUUID();
+        const conversationId2 = crypto.randomUUID();
         const getState = getStateFunction(
           [
             getViewedStoryData(storyId1, conversationId2),
@@ -859,7 +859,7 @@ describe('both/state/ducks/stories', () => {
     const { queueStoryDownload } = actions;
 
     it('no attachment, no dispatch', async () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
       const messageAttributes = getStoryMessage(storyId);
 
       window.MessageCache.__DEPRECATED$register(
@@ -875,13 +875,13 @@ describe('both/state/ducks/stories', () => {
     });
 
     it('downloading, no dispatch', async () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
       const messageAttributes = {
         ...getStoryMessage(storyId),
         attachments: [
           {
             contentType: IMAGE_JPEG,
-            downloadJobId: generateUuid(),
+            downloadJobId: crypto.randomUUID(),
             pending: true,
             size: 0,
           },
@@ -901,7 +901,7 @@ describe('both/state/ducks/stories', () => {
     });
 
     it('downloaded, no dispatch', async () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
       const messageAttributes = {
         ...getStoryMessage(storyId),
         attachments: [
@@ -927,7 +927,7 @@ describe('both/state/ducks/stories', () => {
     });
 
     it('not downloaded, queued for download', async () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
       const messageAttributes = {
         ...getStoryMessage(storyId),
         attachments: [
@@ -979,7 +979,7 @@ describe('both/state/ducks/stories', () => {
     });
 
     it('preview not downloaded, queued for download', async () => {
-      const storyId = generateUuid();
+      const storyId = crypto.randomUUID();
       const preview = {
         url: 'https://signal.org',
         image: {

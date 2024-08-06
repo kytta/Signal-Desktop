@@ -3,7 +3,7 @@
 
 import * as sinon from 'sinon';
 import { session } from 'electron';
-import { v4 as uuid } from 'uuid';
+
 
 import { updateDefaultSession } from '../../../app/updateDefaultSession';
 
@@ -19,7 +19,7 @@ describe('updateDefaultSession', () => {
   });
 
   it('sets the spellcheck URL', () => {
-    const sesh = session.fromPartition(uuid());
+    const sesh = session.fromPartition(crypto.randomUUID());
     const stub = sandbox.stub(sesh, 'setSpellCheckerDictionaryDownloadURL');
 
     updateDefaultSession(sesh);

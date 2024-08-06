@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { v4 as uuid } from 'uuid';
+
 import { RowType, _testHeaderText } from '../../../components/ConversationList';
 import { getDefaultConversation } from '../../../test-both/helpers/getDefaultConversation';
 
@@ -11,9 +11,9 @@ import { LeftPaneSearchHelper } from '../../../components/leftPane/LeftPaneSearc
 
 describe('LeftPaneSearchHelper', () => {
   const fakeMessage = () => ({
-    id: uuid(),
+    id: crypto.randomUUID(),
     type: 'outgoing',
-    conversationId: uuid(),
+    conversationId: crypto.randomUUID(),
   });
 
   describe('getBackAction', () => {

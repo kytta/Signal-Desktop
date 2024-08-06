@@ -1,7 +1,7 @@
 // Copyright 2024 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateGuid } from 'uuid';
+
 
 import { DataWriter } from '../../sql/Client';
 import { SignalService as Proto } from '../../protobuf';
@@ -62,7 +62,7 @@ function createMessage(
   return {
     conversationId: groupConversation.id,
     groupV2Change: change,
-    id: generateGuid(),
+    id: crypto.randomUUID(),
     received_at: counter,
     sent_at: counter,
     timestamp: counter,
@@ -2020,7 +2020,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const zeroTimer = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         expirationTimerUpdate: {
           expireTimer: DurationInSeconds.fromSeconds(5),
@@ -2036,7 +2036,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const fiveSecondTimer = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         expirationTimerUpdate: {
           expireTimer: DurationInSeconds.fromSeconds(5),
@@ -2064,7 +2064,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const zeroTimer = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: contactA.id,
         expirationTimerUpdate: {
           expireTimer: DurationInSeconds.fromSeconds(0),
@@ -2080,7 +2080,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const fiveSecondTimer = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: contactA.id,
         expirationTimerUpdate: {
           expireTimer: DurationInSeconds.fromSeconds(5),
@@ -2113,7 +2113,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const droppedOnly = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: false,
@@ -2129,7 +2129,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const invitedOnly = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: false,
@@ -2145,7 +2145,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const bothAndInvited = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: true,
@@ -2177,7 +2177,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const legacyBefore = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         droppedGV2MemberIds: [CONTACT_C],
         invitedGV2Members: [
@@ -2191,7 +2191,7 @@ describe('backup/groupv2/notifications', () => {
         sourceServiceId: OUR_ACI,
       };
       const legacyAfter = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: false,
@@ -2207,7 +2207,7 @@ describe('backup/groupv2/notifications', () => {
 
       counter += 1;
       const allDataBefore = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: true,
@@ -2224,7 +2224,7 @@ describe('backup/groupv2/notifications', () => {
         sourceServiceId: OUR_ACI,
       };
       const allDataAfter = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: groupConversation.id,
         groupMigration: {
           areWeInvited: true,

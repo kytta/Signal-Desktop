@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataWriter } from '../../sql/Client';
 import { SendStatus } from '../../messages/MessageSendState';
@@ -27,7 +27,7 @@ describe('Conversations', () => {
     // Creating a fake conversation
     const conversation = new window.Whisper.Conversation({
       avatars: [],
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       e164: '+15551234567',
       serviceId: generateAci(),
       type: 'private',
@@ -66,7 +66,7 @@ describe('Conversations', () => {
       hasAttachments: false,
       hasFileAttachments: false,
       hasVisualMediaAttachments: false,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       received_at: now,
       sent_at: now,
       timestamp: now,
@@ -120,7 +120,7 @@ describe('Conversations', () => {
     // Creating a fake conversation
     const conversation = new window.Whisper.Conversation({
       avatars: [],
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       e164: '+15551234567',
       serviceId: generateAci(),
       type: 'private',

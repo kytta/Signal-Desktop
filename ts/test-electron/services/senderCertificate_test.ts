@@ -6,7 +6,7 @@
 
 import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { v4 as uuid } from 'uuid';
+
 import Long from 'long';
 import * as durations from '../../util/durations';
 import { drop } from '../../util/drop';
@@ -65,7 +65,7 @@ describe('SenderCertificateService', () => {
       put: sinon.stub().resolves(),
       remove: sinon.stub().resolves(),
     };
-    fakeStorage.get.withArgs('uuid_id').returns(`${uuid()}.2`);
+    fakeStorage.get.withArgs('uuid_id').returns(`${crypto.randomUUID()}.2`);
     fakeStorage.get.withArgs('password').returns('abc123');
   });
 

@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 
 import type { WritableDB } from '../../sql/Interface';
 import { getMostRecentAddressableNondisappearingMessages } from '../../sql/Server';
@@ -39,8 +38,8 @@ describe('SQL/updateToSchemaVersion1080', () => {
 
   describe('Addressable Messages', () => {
     it('returns only incoming/outgoing messages', () => {
-      const conversationId = generateGuid();
-      const otherConversationId = generateGuid();
+      const conversationId = crypto.randomUUID();
+      const otherConversationId = crypto.randomUUID();
 
       insertData(db, 'messages', [
         generateMessage({

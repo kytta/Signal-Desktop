@@ -1,7 +1,7 @@
 // Copyright 2024 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateGuid } from 'uuid';
+
 import Long from 'long';
 
 import type { ConversationModel } from '../../models/conversations';
@@ -62,7 +62,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -82,7 +82,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'chat-session-refreshed',
         received_at: 1,
         sent_at: 1,
@@ -96,7 +96,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'keychange',
         received_at: 1,
         sent_at: 1,
@@ -110,7 +110,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: group.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'keychange',
         key_changed: contactA.id,
         received_at: 1,
@@ -125,7 +125,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'verified-change',
         verifiedChanged: contactA.id,
         verified: false,
@@ -141,7 +141,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'verified-change',
         verifiedChanged: contactA.id,
         verified: true,
@@ -157,7 +157,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'change-number-notification',
         received_at: 1,
         sent_at: 1,
@@ -171,7 +171,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'joined-signal-notification',
         received_at: 1,
         sent_at: 1,
@@ -185,7 +185,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'delivery-issue',
         received_at: 1,
         sent_at: 1,
@@ -199,7 +199,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         sourceServiceId: CONTACT_A,
         payment: {
@@ -220,7 +220,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         sourceServiceId: CONTACT_A,
         payment: {
@@ -241,7 +241,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -264,7 +264,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -296,7 +296,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -339,7 +339,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -374,7 +374,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -394,7 +394,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'timer-notification',
         received_at: 1,
         sent_at: 1,
@@ -414,7 +414,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'profile-change',
         received_at: 1,
         sent_at: 1,
@@ -434,7 +434,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'title-transition-notification',
         received_at: 1,
         sent_at: 1,
@@ -454,7 +454,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'conversation-merge',
         sourceServiceId: CONTACT_A,
         received_at: 1,
@@ -474,7 +474,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'phone-number-discovery',
         received_at: 1,
         sent_at: 1,
@@ -491,7 +491,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'incoming',
         received_at: 1,
         received_at_ms: 1,
@@ -513,7 +513,7 @@ describe('backup/non-bubble messages', () => {
       [
         {
           conversationId: group.id,
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           type: 'incoming',
           received_at: 1,
           received_at_ms: 1,
@@ -548,7 +548,7 @@ describe('backup/non-bubble messages', () => {
     await symmetricRoundtripHarness([
       {
         conversationId: contactA.id,
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         type: 'message-request-response-event',
         received_at: 1,
         sourceServiceId: CONTACT_A,

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -23,10 +23,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -35,7 +35,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -44,10 +44,10 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 2,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now + 3,
         received_at: now + 3,
         timestamp: now + 3,
@@ -74,10 +74,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -86,24 +86,24 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
         sent_at: now + 2,
         received_at: now + 2,
         timestamp: now + 2,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'incoming',
         conversationId,
         sent_at: now + 3,
         received_at: now + 3,
         timestamp: now + 3,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
       };
 
       await saveMessages([message1, message2, message3], {
@@ -127,10 +127,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         // @ts-expect-error We're forcing a null type here for testing
         type: null,
@@ -140,7 +140,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'change-number-notification',
         conversationId,
@@ -149,7 +149,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 2,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'group-v1-migration',
         conversationId,
@@ -158,7 +158,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 3,
       };
       const message4: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 5',
         type: 'profile-change',
         conversationId,
@@ -167,7 +167,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 5,
       };
       const message5: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 6',
         type: 'story',
         conversationId,
@@ -176,7 +176,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 6,
       };
       const message6: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 7',
         type: 'universal-timer-notification',
         conversationId,
@@ -185,7 +185,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 7,
       };
       const message7: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 8',
         type: 'verified-change',
         conversationId,
@@ -216,10 +216,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         // @ts-expect-error We're forcing a null type here for testing
         type: null,
@@ -229,7 +229,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'change-number-notification',
         conversationId,
@@ -238,7 +238,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 2,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'group-v1-migration',
         conversationId,
@@ -247,7 +247,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 3,
       };
       const message4: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 4',
         type: 'keychange',
         conversationId,
@@ -256,7 +256,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 4,
       };
       const message5: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 6',
         type: 'profile-change',
         conversationId,
@@ -265,7 +265,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 6,
       };
       const message6: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 7',
         type: 'story',
         conversationId,
@@ -274,7 +274,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 7,
       };
       const message7: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 8',
         type: 'universal-timer-notification',
         conversationId,
@@ -283,7 +283,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 8,
       };
       const message8: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 9',
         type: 'verified-change',
         conversationId,
@@ -323,10 +323,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -339,7 +339,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -371,10 +371,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -388,7 +388,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -420,10 +420,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -432,7 +432,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -462,10 +462,10 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -476,7 +476,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -506,11 +506,11 @@ describe('sql/conversationSummary', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const otherServiceId = generateAci();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1 - removing ourselves',
         type: 'group-v2-change',
         conversationId,
@@ -528,7 +528,7 @@ describe('sql/conversationSummary', () => {
         timestamp: now + 1,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2 - someone else leaving',
         type: 'group-v2-change',
         conversationId,

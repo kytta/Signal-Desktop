@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { generateAci } from '../../types/ServiceId';
 import {
@@ -12,8 +12,8 @@ import {
 
 describe('group message merging', () => {
   const defaultMessage = {
-    id: generateUuid(),
-    conversationId: generateUuid(),
+    id: crypto.randomUUID(),
+    conversationId: crypto.randomUUID(),
     timestamp: Date.now(),
     sent_at: Date.now(),
     received_at: Date.now(),

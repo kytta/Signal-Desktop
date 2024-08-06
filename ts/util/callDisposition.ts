@@ -11,7 +11,7 @@ import {
   callIdFromRingId,
   RingUpdate,
 } from '@signalapp/ringrtc';
-import { v4 as generateGuid } from 'uuid';
+
 import { isEqual } from 'lodash';
 import { strictAssert } from './assert';
 import { DataReader, DataWriter } from '../sql/Client';
@@ -1137,7 +1137,7 @@ async function saveCallHistory({
   }
 
   const message: MessageAttributesType = {
-    id: prevMessage?.id ?? generateGuid(),
+    id: prevMessage?.id ?? crypto.randomUUID(),
     conversationId: conversation.id,
     type: 'call-history',
     timestamp: prevMessage?.timestamp ?? callHistory.timestamp,

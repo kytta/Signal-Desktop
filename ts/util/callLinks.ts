@@ -7,7 +7,7 @@ import {
 } from '@signalapp/ringrtc';
 import { Aci } from '@signalapp/libsignal-client';
 import { z } from 'zod';
-import { v4 as generateUuid } from 'uuid';
+
 import * as RemoteConfig from '../RemoteConfig';
 import type { CallLinkAuthCredentialPresentation } from './zkgroup';
 import {
@@ -223,7 +223,7 @@ export function toCallHistoryFromUnusedCallLink(
   callLink: CallLinkType
 ): CallHistoryDetails {
   return {
-    callId: generateUuid(),
+    callId: crypto.randomUUID(),
     peerId: callLink.roomId,
     ringerId: null,
     mode: CallMode.Adhoc,

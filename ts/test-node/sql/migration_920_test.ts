@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 import { range } from 'lodash';
 
 import { createDB, insertData, updateToVersion } from './helpers';
@@ -31,9 +30,9 @@ type TestingSignedKey = Omit<
 describe('SQL/updateToSchemaVersion92', () => {
   let db: WritableDB;
 
-  const OUR_ACI = normalizeAci(generateGuid(), 'updateToSchemaVersion92 test');
+  const OUR_ACI = normalizeAci(crypto.randomUUID(), 'updateToSchemaVersion92 test');
   const OUR_PNI = normalizePni(
-    `PNI:${generateGuid()}`,
+    `PNI:${crypto.randomUUID()}`,
     'updateToSchemaVersion92 test'
   );
   let idCount = 0;

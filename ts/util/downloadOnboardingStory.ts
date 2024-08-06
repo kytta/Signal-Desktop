@@ -1,7 +1,7 @@
 // Copyright 2022 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateUuid } from 'uuid';
+
 
 import type { AttachmentType } from '../types/Attachment';
 import type { MessageAttributesType } from '../model-types.d';
@@ -88,7 +88,7 @@ export async function downloadOnboardingStory(): Promise<void> {
         attachments: [attachment],
         canReplyToStory: false,
         conversationId: signalConversation.id,
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         readStatus: ReadStatus.Unread,
         received_at: incrementMessageCounter(),
         received_at_ms: timestamp,

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { generateAci } from '../../types/ServiceId';
 import { DataReader, DataWriter } from '../../sql/Client';
@@ -21,12 +21,12 @@ describe('sql/getMessagesBetween', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
 
     function getMessage(body: string, offset: number): MessageAttributesType {
       return {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body,
         type: 'outgoing',
         conversationId,
@@ -69,12 +69,12 @@ describe('sql/getMessagesBetween', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
 
     function getMessage(body: string, offset: number): MessageAttributesType {
       return {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body,
         type: 'outgoing',
         conversationId,

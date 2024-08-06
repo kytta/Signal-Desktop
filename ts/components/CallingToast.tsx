@@ -13,7 +13,6 @@ import { useFocusWithin, useHover, mergeProps } from 'react-aria';
 import { createPortal } from 'react-dom';
 import { useTransition, animated } from '@react-spring/web';
 import classNames from 'classnames';
-import { v4 as uuid } from 'uuid';
 import { useIsMounted } from '../hooks/useIsMounted';
 import type { LocalizerType } from '../types/I18N';
 import { usePrevious } from '../hooks/usePrevious';
@@ -136,7 +135,7 @@ export function CallingToastProvider({
         return toast.key;
       }
 
-      const key = toast.key ?? uuid();
+      const key = toast.key ?? crypto.randomUUID();
 
       setToasts(state => {
         const isCurrentlyBeingShown = state.some(
@@ -410,7 +409,7 @@ export function PersistentCallingToast({
   children: string | JSX.Element;
 }): null {
   const { showToast } = useCallingToasts();
-  const toastId = useRef<string>(uuid());
+  const toastId = useRef<string>(crypto.randomUUID());
   useEffect(() => {
     showToast({
       key: toastId.current,

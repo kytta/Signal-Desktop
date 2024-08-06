@@ -3,7 +3,6 @@
 
 import path from 'path';
 import { ipcRenderer } from 'electron';
-import { v4 as genUuid } from 'uuid';
 
 import { blobToArrayBuffer } from '../types/VisualAttachment';
 import type { MIMEType } from '../types/MIME';
@@ -19,7 +18,7 @@ export async function handleImageAttachment(
   let processedFile: File | Blob = file;
 
   if (isHeic(file.type, file.name)) {
-    const uuid = genUuid();
+    const uuid = crypto.randomUUID();
     const bytes = new Uint8Array(await file.arrayBuffer());
 
     const convertedFile = await new Promise<File>((resolve, reject) => {
@@ -55,7 +54,7 @@ export async function handleImageAttachment(
 
   return {
     blurHash,
-    clientUuid: genUuid(),
+    clientUuid: crypto.randomUUID(),
     contentType,
     data: new Uint8Array(data),
     fileName: fileName || file.name,

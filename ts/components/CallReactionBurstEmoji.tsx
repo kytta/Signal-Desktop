@@ -4,7 +4,6 @@
 import React from 'react';
 import { animated, useSpring } from '@react-spring/web';
 import { random } from 'lodash';
-import { v4 as uuid } from 'uuid';
 import { Emojify } from './conversation/Emojify';
 
 export type PropsType = {
@@ -34,7 +33,7 @@ export function CallReactionBurstEmoji({ values }: PropsType): JSX.Element {
   const generateEmojiProps = React.useCallback(
     (index: number) => {
       return {
-        key: uuid(),
+        key: crypto.randomUUID(),
         value: values[index % values.length],
         springConfig: {
           mass: random(10, 20),

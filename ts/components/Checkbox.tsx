@@ -3,7 +3,6 @@
 
 import type { ReactNode } from 'react';
 import React, { forwardRef, useMemo } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { getClassNamesFor } from '../util/getClassNamesFor';
 
@@ -41,7 +40,7 @@ export const Checkbox = forwardRef(function CheckboxInner(
   ref: React.Ref<HTMLInputElement>
 ): JSX.Element {
   const getClassName = getClassNamesFor('Checkbox', moduleClassName);
-  const id = useMemo(() => `${name}::${uuid()}`, [name]);
+  const id = useMemo(() => `${name}::${crypto.randomUUID()}`, [name]);
 
   const checkboxNode = (
     <div className={getClassName('__checkbox')}>

@@ -3,7 +3,6 @@
 
 import classNames from 'classnames';
 import React, { useMemo } from 'react';
-import uuid from 'uuid';
 import { getClassNamesFor } from '../util/getClassNamesFor';
 import { CircleCheckbox } from './CircleCheckbox';
 
@@ -154,7 +153,7 @@ ListTile.checkbox = (
   props: Omit<Props, 'trailing'> & { isChecked: boolean }
 ) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const htmlId: string = useMemo(() => uuid(), []);
+  const htmlId: string = useMemo(() => crypto.randomUUID(), []);
 
   const { onClick, disabled, isChecked, ...otherProps } = props;
   return (

@@ -3,7 +3,7 @@
 
 import { Aci, Pni, ServiceId } from '@signalapp/libsignal-client';
 import { ReceiptCredentialPresentation } from '@signalapp/libsignal-client/zkgroup';
-import { v4 as generateUuid } from 'uuid';
+
 import pMap from 'p-map';
 import { Writable } from 'stream';
 import { isNumber } from 'lodash';
@@ -690,7 +690,7 @@ export class BackupImportStream extends Writable {
     }
 
     const attrs: ConversationAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       type: 'private',
       version: 2,
       serviceId: aci ?? pni,
@@ -774,7 +774,7 @@ export class BackupImportStream extends Writable {
         break;
     }
     const attrs: ConversationAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       type: 'group',
       version: 2,
       groupVersion: 2,
@@ -1069,7 +1069,7 @@ export class BackupImportStream extends Writable {
     }
 
     let attributes: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       conversationId: chatConvo.id,
       received_at: incrementMessageCounter(),
       sent_at: timestamp,
@@ -2562,7 +2562,7 @@ export class BackupImportStream extends Writable {
     };
 
     for (const color of customChatColors) {
-      const uuid = generateUuid();
+      const uuid = crypto.randomUUID();
       let value: CustomColorType;
 
       if (color.solid) {

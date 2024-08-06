@@ -2,14 +2,13 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 
 import type { WritableDB } from '../../sql/Interface';
 import { createDB, updateToVersion, insertData, getTableData } from './helpers';
 
-const CONVO_ID = generateGuid();
-const OUR_ACI = generateGuid();
-const OUR_UNPREFIXED_PNI = generateGuid();
+const CONVO_ID = crypto.randomUUID();
+const OUR_ACI = crypto.randomUUID();
+const OUR_UNPREFIXED_PNI = crypto.randomUUID();
 const OUR_PREFIXED_PNI = `PNI:${OUR_UNPREFIXED_PNI}`;
 
 describe('SQL/updateToSchemaVersion960', () => {

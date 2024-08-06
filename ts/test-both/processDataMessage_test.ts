@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import Long from 'long';
-import { v4 as generateUuid } from 'uuid';
+
 
 import {
   processDataMessage,
@@ -19,7 +19,7 @@ const ACI_1 = generateAci();
 const FLAGS = Proto.DataMessage.Flags;
 
 const TIMESTAMP = Date.now();
-const CLIENT_UUID = generateUuid();
+const CLIENT_UUID = crypto.randomUUID();
 
 const UNPROCESSED_ATTACHMENT: Proto.IAttachmentPointer = {
   cdnId: Long.fromNumber(123),

@@ -3,7 +3,7 @@
 
 import { callIdFromEra } from '@signalapp/ringrtc';
 import Long from 'long';
-import { v4 as generateUuid } from 'uuid';
+
 import { isObject } from 'lodash';
 
 import type { SetOptional } from 'type-fest';
@@ -135,7 +135,7 @@ function convertLegacyCallDetails(
 
   if (mode === CallMode.Direct) {
     // We don't have a callId for older calls, generating a uuid instead
-    callId = details.callId ?? generateUuid();
+    callId = details.callId ?? crypto.randomUUID();
     type = details.wasVideoCall ? CallType.Video : CallType.Audio;
     direction = details.wasIncoming
       ? CallDirection.Incoming

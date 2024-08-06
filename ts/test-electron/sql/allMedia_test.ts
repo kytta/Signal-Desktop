@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -26,10 +26,10 @@ describe('sql/allMedia', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -39,7 +39,7 @@ describe('sql/allMedia', () => {
         hasVisualMediaAttachments: true,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -48,10 +48,10 @@ describe('sql/allMedia', () => {
         timestamp: now - 10,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
@@ -77,10 +77,10 @@ describe('sql/allMedia', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -90,25 +90,25 @@ describe('sql/allMedia', () => {
         hasVisualMediaAttachments: true,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
         sent_at: now - 10,
         received_at: now - 10,
         timestamp: now - 10,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         hasVisualMediaAttachments: true,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'story',
         conversationId,
         sent_at: now,
         received_at: now,
         timestamp: now,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         hasVisualMediaAttachments: true,
       };
 
@@ -133,10 +133,10 @@ describe('sql/allMedia', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -146,7 +146,7 @@ describe('sql/allMedia', () => {
         hasFileAttachments: true,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -155,10 +155,10 @@ describe('sql/allMedia', () => {
         timestamp: now - 10,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
@@ -184,10 +184,10 @@ describe('sql/allMedia', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -197,25 +197,25 @@ describe('sql/allMedia', () => {
         hasFileAttachments: true,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
         sent_at: now - 10,
         received_at: now - 10,
         timestamp: now - 10,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         hasFileAttachments: true,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'story',
         conversationId,
         sent_at: now,
         received_at: now,
         timestamp: now,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
         hasFileAttachments: true,
       };
 

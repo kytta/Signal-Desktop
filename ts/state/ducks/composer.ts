@@ -4,7 +4,6 @@
 import path from 'path';
 import { debounce, isEqual } from 'lodash';
 import type { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { v4 as generateUuid } from 'uuid';
 
 import type { ReadonlyDeep } from 'type-fest';
 import type {
@@ -129,7 +128,7 @@ function getEmptyComposerState(): ComposerStateByConversationType {
     focusCounter: 0,
     isDisabled: false,
     linkPreviewLoading: false,
-    messageCompositionId: generateUuid(),
+    messageCompositionId: crypto.randomUUID(),
     sendCounter: 0,
   };
 }
@@ -803,7 +802,7 @@ function addAttachment(
     // We do async operations first so multiple in-process addAttachments don't stomp on
     //   each other.
     const onDisk = await writeDraftAttachment(attachment);
-    const toAdd = { ...onDisk, clientUuid: generateUuid() };
+    const toAdd = { ...onDisk, clientUuid: crypto.randomUUID() };
 
     const state = getState();
 
@@ -1170,7 +1169,7 @@ function getPendingAttachment(file: File): AttachmentDraftType | undefined {
 
   return {
     contentType: fileType,
-    clientUuid: generateUuid(),
+    clientUuid: crypto.randomUUID(),
     fileName,
     size: file.size,
     path: file.name,

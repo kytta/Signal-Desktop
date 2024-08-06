@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -22,12 +22,12 @@ describe('sql/stories', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const sourceServiceId = generateAci();
       const ourAci = generateAci();
 
       const story1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 1',
         type: 'story',
         conversationId,
@@ -37,27 +37,27 @@ describe('sql/stories', () => {
         sourceServiceId: generateAci(),
       };
       const story2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 2',
         type: 'story',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now - 10,
         received_at: now - 10,
         timestamp: now - 10,
         sourceServiceId,
       };
       const story3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'incoming',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
         sourceServiceId,
       };
       const story4: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 4',
         type: 'story',
         conversationId,
@@ -67,10 +67,10 @@ describe('sql/stories', () => {
         sourceServiceId: generateAci(),
       };
       const story5: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 5',
         type: 'story',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
@@ -142,11 +142,11 @@ describe('sql/stories', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const sourceServiceId = generateAci();
       const ourAci = generateAci();
-      const storyId1 = generateUuid();
-      const storyId2 = generateUuid();
+      const storyId1 = crypto.randomUUID();
+      const storyId2 = crypto.randomUUID();
 
       const story1: MessageAttributesType = {
         id: storyId1,
@@ -162,35 +162,35 @@ describe('sql/stories', () => {
         id: storyId2,
         body: 'story 2',
         type: 'story',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now - 10,
         received_at: now - 10,
         timestamp: now - 10,
         sourceServiceId,
       };
       const story3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 3',
         type: 'story',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
         sourceServiceId,
       };
       const replyTo1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'incoming',
         storyId: storyId1,
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
         sourceServiceId,
       };
       const replyFromSelfTo1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 4',
         type: 'outgoing',
         storyId: storyId1,
@@ -201,11 +201,11 @@ describe('sql/stories', () => {
         sourceServiceId: generateAci(),
       };
       const replyTo2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story 5',
         type: 'incoming',
         storyId: storyId2,
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,

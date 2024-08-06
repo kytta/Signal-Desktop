@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
+
 
 import { jsonToObject, sql } from '../../sql/util';
 import { createDB, updateToVersion } from './helpers';
@@ -67,8 +67,8 @@ describe('SQL/updateToSchemaVersion1000', () => {
     type: 'private' | 'group',
     discoveredUnregisteredAt?: number
   ) {
-    const id = generateGuid();
-    const groupId = type === 'group' ? generateGuid() : null;
+    const id = crypto.randomUUID();
+    const groupId = type === 'group' ? crypto.randomUUID() : null;
 
     const json = JSON.stringify({
       type,
@@ -113,7 +113,7 @@ describe('SQL/updateToSchemaVersion1000', () => {
     const callId2 = '2';
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation1.id,
       callId: callId1,
       readStatus: ReadStatus.Unread,
@@ -121,7 +121,7 @@ describe('SQL/updateToSchemaVersion1000', () => {
     });
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation2.id,
       callId: callId2,
       readStatus: ReadStatus.Unread,
@@ -153,7 +153,7 @@ describe('SQL/updateToSchemaVersion1000', () => {
     const callId2 = '2';
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation1.id,
       callId: callId1,
       readStatus: ReadStatus.Read,
@@ -161,7 +161,7 @@ describe('SQL/updateToSchemaVersion1000', () => {
     });
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation2.id,
       callId: callId2,
       readStatus: ReadStatus.Read,

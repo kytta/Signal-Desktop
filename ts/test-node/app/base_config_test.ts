@@ -6,7 +6,7 @@ import { tmpdir } from 'os';
 import { chmodSync, rmSync, writeFileSync, mkdtempSync } from 'fs';
 import { pathExists, readJsonSync } from 'fs-extra';
 
-import { v4 as generateGuid } from 'uuid';
+
 import { assert } from 'chai';
 
 import type { ConfigType } from '../../../app/base_config';
@@ -18,7 +18,7 @@ describe('base_config', () => {
 
   beforeEach(() => {
     targetDir = mkdtempSync(path.join(tmpdir(), 'base_config'));
-    targetPath = path.join(targetDir, `${generateGuid()}.json`);
+    targetPath = path.join(targetDir, `${crypto.randomUUID()}.json`);
   });
 
   afterEach(() => {

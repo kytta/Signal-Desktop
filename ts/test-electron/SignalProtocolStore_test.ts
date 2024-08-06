@@ -14,7 +14,7 @@ import {
   SessionRecord,
   SignedPreKeyRecord,
 } from '@signalapp/libsignal-client';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../sql/Client';
 import { signal } from '../protobuf/compiled';
@@ -180,7 +180,7 @@ describe('SignalProtocolStore', () => {
 
   describe('senderKeys', () => {
     it('roundtrips in memory', async () => {
-      const distributionId = generateUuid();
+      const distributionId = crypto.randomUUID();
       const expected = getSenderKeyRecord();
 
       const deviceId = 1;
@@ -210,7 +210,7 @@ describe('SignalProtocolStore', () => {
     });
 
     it('roundtrips through database', async () => {
-      const distributionId = generateUuid();
+      const distributionId = crypto.randomUUID();
       const expected = getSenderKeyRecord();
 
       const deviceId = 1;
@@ -1173,7 +1173,7 @@ describe('SignalProtocolStore', () => {
   });
 
   describe('zones', () => {
-    const distributionId = generateUuid();
+    const distributionId = crypto.randomUUID();
     const zone = new Zone('zone', {
       pendingSenderKeys: true,
       pendingSessions: true,

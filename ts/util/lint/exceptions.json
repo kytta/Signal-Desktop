@@ -2374,7 +2374,7 @@
   {
     "rule": "React-useRef",
     "path": "ts/components/CallingToast.tsx",
-    "line": "  const toastId = useRef<string>(uuid());",
+    "line": "  const toastId = useRef<string>(crypto.randomUUID());",
     "reasonCategory": "usageTrusted",
     "updated": "2023-11-14T16:52:45.342Z"
   },

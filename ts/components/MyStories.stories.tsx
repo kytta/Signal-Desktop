@@ -4,7 +4,6 @@
 import type { Meta, ReactRenderer, StoryFn } from '@storybook/react';
 import type { PlayFunction } from '@storybook/csf';
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 import { expect, fn, within, userEvent } from '@storybook/test';
 
 import { action } from '@storybook/addon-actions';
@@ -82,8 +81,8 @@ export const MultiListStories = Template.bind({});
 MultiListStories.args = {
   myStories: [
     getFakeMyStory(MY_STORY_ID),
-    getFakeMyStory(uuid(), 'Cool Peeps'),
-    getFakeMyStory(uuid(), 'Family'),
+    getFakeMyStory(crypto.randomUUID(), 'Cool Peeps'),
+    getFakeMyStory(crypto.randomUUID(), 'Family'),
   ],
 };
 MultiListStories.play = interactionTest;
@@ -110,7 +109,7 @@ export const FailedSentStory = Template.bind({});
           return story;
         }),
       },
-      getFakeMyStory(uuid(), 'Cool Peeps'),
+      getFakeMyStory(crypto.randomUUID(), 'Cool Peeps'),
     ],
   };
 }

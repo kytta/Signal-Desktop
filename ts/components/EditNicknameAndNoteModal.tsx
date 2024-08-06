@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import type { FormEvent } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
-import uuid from 'uuid';
 import { z } from 'zod';
 import { Modal } from './Modal';
 import type { LocalizerType } from '../types/I18N';
@@ -57,10 +56,10 @@ export function EditNicknameAndNoteModal({
   );
   const [note, setNote] = useState(conversation.note ?? '');
 
-  const [formId] = useState(() => uuid());
-  const [givenNameId] = useState(() => uuid());
-  const [familyNameId] = useState(() => uuid());
-  const [noteId] = useState(() => uuid());
+  const [formId] = useState(() => crypto.randomUUID());
+  const [givenNameId] = useState(() => crypto.randomUUID());
+  const [familyNameId] = useState(() => crypto.randomUUID());
+  const [noteId] = useState(() => crypto.randomUUID());
 
   const formResult = useMemo(() => {
     const givenNameValue = toOptionalStringValue(givenName);

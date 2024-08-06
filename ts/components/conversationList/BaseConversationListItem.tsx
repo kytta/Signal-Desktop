@@ -5,7 +5,6 @@ import type { ReactNode, FunctionComponent } from 'react';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import classNames from 'classnames';
 import { isBoolean, isNumber } from 'lodash';
-import { v4 as generateUuid } from 'uuid';
 
 import { Avatar, AvatarSize } from '../Avatar';
 import type { BadgeType } from '../../badges/types';
@@ -113,7 +112,7 @@ export const BaseConversationListItem: FunctionComponent<PropsType> =
     } = props;
 
     const identifier = id ? cleanId(id) : undefined;
-    const htmlId = useMemo(() => generateUuid(), []);
+    const htmlId = useMemo(() => crypto.randomUUID(), []);
     const testId = overrideTestId || groupId || serviceId;
     const isUnread = isConversationUnread({ markedUnread, unreadCount });
 

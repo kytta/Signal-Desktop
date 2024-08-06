@@ -7,7 +7,6 @@ import classNames from 'classnames';
 import { noop } from 'lodash';
 import { animated } from '@react-spring/web';
 
-import { v4 as uuid } from 'uuid';
 import type { LocalizerType } from '../types/Util';
 import { ModalHost } from './ModalHost';
 import type { Theme } from '../util/theme';
@@ -197,7 +196,7 @@ export function ModalPage({
   );
   const getClassName = getClassNamesFor(BASE_CLASS_NAME, moduleClassName);
 
-  const [id] = useState(() => uuid());
+  const [id] = useState(() => crypto.randomUUID());
 
   useScrollObserver(bodyRef, bodyInnerRef, scroll => {
     setScrolled(isScrolled(scroll));

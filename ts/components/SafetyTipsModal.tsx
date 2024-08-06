@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 import type { UIEvent } from 'react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import uuid from 'uuid';
 import type { LocalizerType } from '../types/I18N';
 import { Modal } from './Modal';
 import { Button, ButtonVariant } from './Button';
@@ -46,8 +45,8 @@ export function SafetyTipsModal({
     ];
   }, [i18n]);
 
-  const [modalId] = useState(() => uuid());
-  const [cardWrapperId] = useState(() => uuid());
+  const [modalId] = useState(() => crypto.randomUUID());
+  const [cardWrapperId] = useState(() => crypto.randomUUID());
 
   function getCardIdForPage(pageIndex: number) {
     return `${cardWrapperId}_${pages[pageIndex].key}`;

@@ -2,18 +2,17 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 
 import type { WritableDB } from '../../sql/Interface';
 import { createDB, updateToVersion, insertData, getTableData } from './helpers';
 
-const CONVO_ID = generateGuid();
-const GROUP_ID = generateGuid();
-const UUID = generateGuid();
-const PNI = generateGuid();
-const OUR_UUID = generateGuid();
-const OUR_PNI = generateGuid();
-const THEIR_UUID = generateGuid();
+const CONVO_ID = crypto.randomUUID();
+const GROUP_ID = crypto.randomUUID();
+const UUID = crypto.randomUUID();
+const PNI = crypto.randomUUID();
+const OUR_UUID = crypto.randomUUID();
+const OUR_PNI = crypto.randomUUID();
+const THEIR_UUID = crypto.randomUUID();
 
 describe('SQL/updateToSchemaVersion88', () => {
   let db: WritableDB;

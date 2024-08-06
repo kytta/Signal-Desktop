@@ -11,7 +11,6 @@ import fetch from 'node-fetch';
 import type { Agent } from 'https';
 import { escapeRegExp, isNumber, isString, isObject } from 'lodash';
 import PQueue from 'p-queue';
-import { v4 as getGuid } from 'uuid';
 import { z } from 'zod';
 import type { Readable } from 'stream';
 
@@ -3311,7 +3310,7 @@ export function initialize({
       // Note: when using the boundary string in the POST body, it needs to be prefixed by
       //   an extra --, and the final boundary string at the end gets a -- prefix and a --
       //   suffix.
-      const boundaryString = `----------------${getGuid().replace(/-/g, '')}`;
+      const boundaryString = `----------------${crypto.randomUUID().replace(/-/g, '')}`;
       const CRLF = '\r\n';
       const getSection = (name: string, value: string) =>
         [

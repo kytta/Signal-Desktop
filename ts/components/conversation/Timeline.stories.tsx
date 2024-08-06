@@ -3,7 +3,6 @@
 
 import * as React from 'react';
 import { times } from 'lodash';
-import { v4 as uuid } from 'uuid';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import { setupI18n } from '../../util/setupI18n';
@@ -467,7 +466,7 @@ const useProps = (overrideProps: Partial<PropsType> = {}): PropsType => ({
   hasContactSpoofingReview: false,
   conversationType: 'direct',
 
-  id: uuid(),
+  id: crypto.randomUUID(),
   renderItem,
   renderHeroRow,
   renderMiniPlayer,
@@ -587,7 +586,7 @@ export function WithSameNameInGroupConversationWarning(): JSX.Element {
       type: ContactSpoofingType.MultipleGroupMembersWithSameTitle,
       acknowledgedGroupNameCollisions: {},
       groupNameCollisions: {
-        Alice: times(2, () => uuid()),
+        Alice: times(2, () => crypto.randomUUID()),
       },
     },
     items: [],
@@ -602,8 +601,8 @@ export function WithSameNamesInGroupConversationWarning(): JSX.Element {
       type: ContactSpoofingType.MultipleGroupMembersWithSameTitle,
       acknowledgedGroupNameCollisions: {},
       groupNameCollisions: {
-        Alice: times(2, () => uuid()),
-        Bob: times(3, () => uuid()),
+        Alice: times(2, () => crypto.randomUUID()),
+        Bob: times(3, () => crypto.randomUUID()),
       },
     },
     items: [],

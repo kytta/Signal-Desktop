@@ -3,7 +3,6 @@
 
 import type { Meta, StoryFn } from '@storybook/react';
 import React, { useState } from 'react';
-import { v4 as generateUuid } from 'uuid';
 
 import { action } from '@storybook/addon-actions';
 import type { PropsType } from './StoryViewsNRepliesModal';
@@ -95,34 +94,34 @@ function getViewsAndReplies() {
       author: p2,
       body: 'So cute ❤️',
       conversationId: p2.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       timestamp: Date.now() - 24 * durations.MINUTE,
     },
     {
       author: p3,
       body: "That's awesome",
       conversationId: p3.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       timestamp: Date.now() - 13 * durations.MINUTE,
     },
     {
       author: p3,
       body: 'Very awesome',
       conversationId: p3.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       timestamp: Date.now() - 13 * durations.MINUTE,
     },
     {
       author: p3,
       body: 'Did I mention how awesome this is?',
       conversationId: p3.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       timestamp: Date.now() - 12 * durations.MINUTE,
     },
     {
       author: p4,
       conversationId: p4.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       reactionEmoji: '❤️',
       timestamp: Date.now() - 5 * durations.MINUTE,
     },
@@ -130,7 +129,7 @@ function getViewsAndReplies() {
       author: p6,
       body: 'Thanks everyone!',
       conversationId: p6.id,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       sendStateByConversationId: {
         [p1.id]: {
           status: SendStatus.Pending,

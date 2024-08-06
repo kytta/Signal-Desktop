@@ -15,7 +15,6 @@ import { FAILSAFE_SCHEMA, safeLoad } from 'js-yaml';
 import { gt, lt } from 'semver';
 import config from 'config';
 import got from 'got';
-import { v4 as getGuid } from 'uuid';
 import type { BrowserWindow } from 'electron';
 import { app, ipcMain } from 'electron';
 
@@ -957,7 +956,7 @@ export async function createTempDir(): Promise<string> {
 
 export async function getTempDir(): Promise<string> {
   const baseTempDir = getBaseTempDir();
-  const uniqueName = getGuid();
+  const uniqueName = crypto.randomUUID();
 
   // Create parent folder if not already present
   if (!(await pathExists(baseTempDir))) {

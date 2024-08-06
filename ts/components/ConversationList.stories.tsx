@@ -3,7 +3,6 @@
 
 import React, { useContext } from 'react';
 import { times, omit } from 'lodash';
-import { v4 as generateUuid } from 'uuid';
 import { action } from '@storybook/addon-actions';
 import type { Meta } from '@storybook/react';
 import type { Row, PropsType } from './ConversationList';
@@ -339,7 +338,7 @@ export function ConversationsMessageStatuses(): JSX.Element {
 export const ConversationTypingStatus = (): JSX.Element =>
   renderConversation({
     typingContactIdTimestamps: {
-      [generateUuid()]: Date.now(),
+      [crypto.randomUUID()]: Date.now(),
     },
   });
 

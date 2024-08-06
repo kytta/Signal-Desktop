@@ -9,7 +9,6 @@ import rimraf from 'rimraf';
 import { randomBytes } from 'crypto';
 import type { Database, Statement } from '@signalapp/better-sqlite3';
 import SQL from '@signalapp/better-sqlite3';
-import { v4 as generateUuid } from 'uuid';
 import { z } from 'zod';
 import type { ReadonlyDeep } from 'type-fest';
 
@@ -2263,7 +2262,7 @@ export function saveMessage(
 
   const toCreate = {
     ...data,
-    id: id || generateUuid(),
+    id: id || crypto.randomUUID(),
   };
 
   prepare(

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { differenceWith, omit, partition } from 'lodash';
-import { v4 as generateUuid } from 'uuid';
+
 
 import {
   ErrorCode,
@@ -334,7 +334,7 @@ export async function sendToGroupViaSenderKey(options: {
     );
     await sendTarget.saveSenderKeyInfo({
       createdAtDate: Date.now(),
-      distributionId: generateUuid(),
+      distributionId: crypto.randomUUID(),
       memberDevices: [],
     });
 

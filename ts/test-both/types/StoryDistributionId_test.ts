@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 import * as sinon from 'sinon';
 
 import type { LoggerType } from '../../types/Logging';
@@ -19,7 +19,7 @@ describe('StoryDistributionId', () => {
 
   describe('normalizeStoryDistributionId', () => {
     it('converts uuid to lower case', () => {
-      const uuid = generateUuid();
+      const uuid = crypto.randomUUID();
       assert.strictEqual(
         normalizeStoryDistributionId(uuid, 'context 1', logger),
         uuid

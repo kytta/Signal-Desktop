@@ -8,7 +8,7 @@ import * as sinon from 'sinon';
 import EventEmitter, { once } from 'events';
 import { z } from 'zod';
 import { noop, groupBy } from 'lodash';
-import { v4 as uuid } from 'uuid';
+
 import PQueue from 'p-queue';
 import { JobError } from '../../jobs/JobError';
 import { TestJobQueueStore } from './TestJobQueueStore';
@@ -399,7 +399,7 @@ describe('JobQueue', () => {
     });
 
     it('passes a logger to the run function', async () => {
-      const uniqueString = uuid();
+      const uniqueString = crypto.randomUUID();
 
       const fakeLogger = {
         fatal: sinon.fake(),
@@ -792,7 +792,7 @@ describe('JobQueue', () => {
       sinon.assert.calledOnce(fakeStore.stream as sinon.SinonStub);
 
       fakeStream.drip({
-        id: uuid(),
+        id: crypto.randomUUID(),
         timestamp: Date.now(),
         queueType: 'test noop queue',
         data: 123,
@@ -800,7 +800,7 @@ describe('JobQueue', () => {
       const [firstRunData] = await once(eventEmitter, 'run');
 
       fakeStream.drip({
-        id: uuid(),
+        id: crypto.randomUUID(),
         timestamp: Date.now(),
         queueType: 'test noop queue',
         data: 456,

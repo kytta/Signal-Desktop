@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 import { sql } from '../../sql/util';
 import { createDB, updateToVersion } from './helpers';
 import type { WritableDB, MessageType } from '../../sql/Interface';
@@ -24,8 +23,8 @@ describe('SQL/updateToSchemaVersion1030', () => {
     attrs: Pick<MessageType, 'type' | 'messageRequestResponseEvent'>
   ): MessageType {
     const message: MessageType = {
-      id: generateGuid(),
-      conversationId: generateGuid(),
+      id: crypto.randomUUID(),
+      conversationId: crypto.randomUUID(),
       received_at: Date.now(),
       sent_at: Date.now(),
       received_at_ms: Date.now(),

@@ -3,7 +3,6 @@
 
 import type { ReactNode } from 'react';
 import React, { useMemo, useState } from 'react';
-import { v4 as generateUuid } from 'uuid';
 import { Modal } from './Modal';
 import type { LocalizerType } from '../types/I18N';
 import type { CallLinkRestrictions } from '../types/CallLink';
@@ -85,7 +84,7 @@ export function CallLinkEditModal({
   onShareCallLinkViaSignal,
   onStartCallLinkLobby,
 }: CallLinkEditModalProps): JSX.Element {
-  const [restrictionsId] = useState(() => generateUuid());
+  const [restrictionsId] = useState(() => crypto.randomUUID());
 
   const callLinkWebUrl = useMemo(() => {
     return linkCallRoute.toWebUrl({ key: callLink.rootKey }).toString();

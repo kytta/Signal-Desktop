@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
+
 
 import { _storyIdPredicate, getJobsInQueue, insertJob } from '../../sql/Server';
 import type { WritableDB } from '../../sql/Interface';
@@ -14,7 +14,7 @@ import type { AciString } from '../../types/ServiceId';
 import { generateAci } from '../../types/ServiceId';
 import { createDB, updateToVersion } from './helpers';
 
-const OUR_UUID = generateGuid();
+const OUR_UUID = crypto.randomUUID();
 
 describe('SQL migrations test', () => {
   let db: WritableDB;
@@ -75,9 +75,9 @@ describe('SQL migrations test', () => {
 
   describe('updateToSchemaVersion41', () => {
     const THEIR_UUID = generateAci();
-    const THEIR_CONVO = generateGuid();
-    const ANOTHER_CONVO = generateGuid();
-    const THIRD_CONVO = generateGuid();
+    const THEIR_CONVO = crypto.randomUUID();
+    const ANOTHER_CONVO = crypto.randomUUID();
+    const THIRD_CONVO = crypto.randomUUID();
 
     it('clears sessions and keys if UUID is not available', () => {
       updateToVersion(db, 40);
@@ -233,10 +233,10 @@ describe('SQL migrations test', () => {
 
       addOurUuid();
 
-      const fullA = generateGuid();
-      const fullB = generateGuid();
-      const fullC = generateGuid();
-      const partial = generateGuid();
+      const fullA = crypto.randomUUID();
+      const fullB = crypto.randomUUID();
+      const fullC = crypto.randomUUID();
+      const partial = crypto.randomUUID();
 
       // When merging two keys for different conversations with the same uuid
       // only the most recent key would be kept in the database. We prefer keys
@@ -352,9 +352,9 @@ describe('SQL migrations test', () => {
 
       addOurUuid();
 
-      const fullA = generateGuid();
-      const fullB = generateGuid();
-      const partial = generateGuid();
+      const fullA = crypto.randomUUID();
+      const fullB = crypto.randomUUID();
+      const partial = crypto.randomUUID();
 
       // Similar merging logic to senderkeys above. We prefer sessions with
       // either:
@@ -513,11 +513,11 @@ describe('SQL migrations test', () => {
   });
 
   describe('updateToSchemaVersion42', () => {
-    const MESSAGE_ID_1 = generateGuid();
-    const MESSAGE_ID_2 = generateGuid();
-    const MESSAGE_ID_3 = generateGuid();
-    const MESSAGE_ID_4 = generateGuid();
-    const CONVERSATION_ID = generateGuid();
+    const MESSAGE_ID_1 = crypto.randomUUID();
+    const MESSAGE_ID_2 = crypto.randomUUID();
+    const MESSAGE_ID_3 = crypto.randomUUID();
+    const MESSAGE_ID_4 = crypto.randomUUID();
+    const CONVERSATION_ID = crypto.randomUUID();
 
     it('deletes orphaned reactions', () => {
       updateToVersion(db, 41);
@@ -794,15 +794,15 @@ describe('SQL migrations test', () => {
 
   describe('updateToSchemaVersion45', () => {
     it('creates new storyId field and delete trigger for storyReads', () => {
-      const AUTHOR_ID = generateGuid();
-      const STORY_ID_1 = generateGuid();
-      const STORY_ID_2 = generateGuid();
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const MESSAGE_ID_5 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const AUTHOR_ID = crypto.randomUUID();
+      const STORY_ID_1 = crypto.randomUUID();
+      const STORY_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const MESSAGE_ID_5 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 45);
 
@@ -848,8 +848,8 @@ describe('SQL migrations test', () => {
     });
 
     it('creates new storyDistributions/Members with cascade delete', () => {
-      const LIST_ID_1 = generateGuid();
-      const LIST_ID_2 = generateGuid();
+      const LIST_ID_1 = crypto.randomUUID();
+      const LIST_ID_2 = crypto.randomUUID();
       const UUID_1 = generateAci();
       const UUID_2 = generateAci();
       const UUID_3 = generateAci();
@@ -902,9 +902,9 @@ describe('SQL migrations test', () => {
   describe('updateToSchemaVersion47', () => {
     it('creates and pre-populates new isChangeCreatedByUs field', () => {
       const OTHER_UUID = generateAci();
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 46);
 
@@ -974,11 +974,11 @@ describe('SQL migrations test', () => {
     });
 
     it('creates new auto-generated isStory field', () => {
-      const STORY_ID_1 = generateGuid();
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const STORY_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 47);
 
@@ -1014,11 +1014,11 @@ describe('SQL migrations test', () => {
     });
 
     it('creates new auto-generated shouldAffectActivity/shouldAffectPreview/isUserInitiatedMessage fields', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 47);
 
@@ -1068,10 +1068,10 @@ describe('SQL migrations test', () => {
     });
 
     it('creates new auto-generated isTimerChangeFromSync fields', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 47);
 
@@ -1124,12 +1124,12 @@ describe('SQL migrations test', () => {
     });
 
     it('creates new auto-generated isGroupLeaveEvent fields', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const MESSAGE_ID_5 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const MESSAGE_ID_5 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
       const FIRST_UUID = generateAci();
       const SECOND_UUID = generateAci();
       const THIRD_UUID = generateAci();
@@ -1345,8 +1345,8 @@ describe('SQL migrations test', () => {
     it('moves reactions/normal send jobs over to conversation queue', () => {
       updateToVersion(db, 50);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const CONVERSATION_ID_1 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
 
       db.exec(
         `
@@ -1397,12 +1397,12 @@ describe('SQL migrations test', () => {
     it('updates reactions jobs with their conversationId', () => {
       updateToVersion(db, 50);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
 
-      const CONVERSATION_ID_1 = generateGuid();
-      const CONVERSATION_ID_2 = generateGuid();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_2 = crypto.randomUUID();
 
       insertJob(db, {
         id: 'id-1',
@@ -1514,11 +1514,11 @@ describe('SQL migrations test', () => {
     it('updates normal send jobs with their conversationId', () => {
       updateToVersion(db, 50);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
 
-      const CONVERSATION_ID_1 = generateGuid();
-      const CONVERSATION_ID_2 = generateGuid();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_2 = crypto.randomUUID();
 
       insertJob(db, {
         id: 'id-1',
@@ -1712,7 +1712,7 @@ describe('SQL migrations test', () => {
       updateToVersion(db, 54);
 
       const E164_1 = '+12125550155';
-      const MESSAGE_ID_1 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
 
       db.exec(
         `
@@ -1755,18 +1755,18 @@ describe('SQL migrations test', () => {
 
   describe('updateToSchemaVersion56', () => {
     it('updates unseenStatus for previously-unread messages', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const MESSAGE_ID_5 = generateGuid();
-      const MESSAGE_ID_6 = generateGuid();
-      const MESSAGE_ID_7 = generateGuid();
-      const MESSAGE_ID_8 = generateGuid();
-      const MESSAGE_ID_9 = generateGuid();
-      const MESSAGE_ID_10 = generateGuid();
-      const MESSAGE_ID_11 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const MESSAGE_ID_5 = crypto.randomUUID();
+      const MESSAGE_ID_6 = crypto.randomUUID();
+      const MESSAGE_ID_7 = crypto.randomUUID();
+      const MESSAGE_ID_8 = crypto.randomUUID();
+      const MESSAGE_ID_9 = crypto.randomUUID();
+      const MESSAGE_ID_10 = crypto.randomUUID();
+      const MESSAGE_ID_11 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 55);
 
@@ -2007,18 +2007,18 @@ describe('SQL migrations test', () => {
 
   describe('updateToSchemaVersion58', () => {
     it('updates unseenStatus for previously-unread messages', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const MESSAGE_ID_5 = generateGuid();
-      const MESSAGE_ID_6 = generateGuid();
-      const MESSAGE_ID_7 = generateGuid();
-      const MESSAGE_ID_8 = generateGuid();
-      const MESSAGE_ID_9 = generateGuid();
-      const MESSAGE_ID_10 = generateGuid();
-      const MESSAGE_ID_11 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const MESSAGE_ID_5 = crypto.randomUUID();
+      const MESSAGE_ID_6 = crypto.randomUUID();
+      const MESSAGE_ID_7 = crypto.randomUUID();
+      const MESSAGE_ID_8 = crypto.randomUUID();
+      const MESSAGE_ID_9 = crypto.randomUUID();
+      const MESSAGE_ID_10 = crypto.randomUUID();
+      const MESSAGE_ID_11 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 55);
 
@@ -2098,10 +2098,10 @@ describe('SQL migrations test', () => {
     });
 
     it('Sets readStatus=Read for keychange and change-number-notification messages', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 57);
 
@@ -2173,11 +2173,11 @@ describe('SQL migrations test', () => {
     });
 
     it('updates readStatus/seenStatus for messages with unread: true/1 in JSON', () => {
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 57);
 
@@ -2402,15 +2402,15 @@ describe('SQL migrations test', () => {
 
   describe('updateToSchemaVersion71', () => {
     it('deletes and re-creates auto-generated shouldAffectActivity/shouldAffectPreview/isUserInitiatedMessage fields', () => {
-      const MESSAGE_ID_0 = generateGuid();
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
-      const MESSAGE_ID_4 = generateGuid();
-      const MESSAGE_ID_5 = generateGuid();
-      const MESSAGE_ID_6 = generateGuid();
-      const MESSAGE_ID_7 = generateGuid();
-      const CONVERSATION_ID = generateGuid();
+      const MESSAGE_ID_0 = crypto.randomUUID();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
+      const MESSAGE_ID_4 = crypto.randomUUID();
+      const MESSAGE_ID_5 = crypto.randomUUID();
+      const MESSAGE_ID_6 = crypto.randomUUID();
+      const MESSAGE_ID_7 = crypto.randomUUID();
+      const CONVERSATION_ID = crypto.randomUUID();
 
       updateToVersion(db, 71);
 
@@ -2476,8 +2476,8 @@ describe('SQL migrations test', () => {
     it('moves receipt jobs over to conversation queue', () => {
       updateToVersion(db, 77);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const CONVERSATION_ID_1 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
 
       db.exec(
         `
@@ -2565,12 +2565,12 @@ describe('SQL migrations test', () => {
     it('updates delivery jobs with their conversationId', () => {
       updateToVersion(db, 77);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
 
-      const CONVERSATION_ID_1 = generateGuid();
-      const CONVERSATION_ID_2 = generateGuid();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_2 = crypto.randomUUID();
 
       insertJob(db, {
         id: 'id-1',
@@ -2736,12 +2736,12 @@ describe('SQL migrations test', () => {
     it('updates read jobs with their conversationId', () => {
       updateToVersion(db, 77);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
 
-      const CONVERSATION_ID_1 = generateGuid();
-      const CONVERSATION_ID_2 = generateGuid();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_2 = crypto.randomUUID();
 
       insertJob(db, {
         id: 'id-1',
@@ -2905,12 +2905,12 @@ describe('SQL migrations test', () => {
     it('updates viewed jobs with their conversationId', () => {
       updateToVersion(db, 77);
 
-      const MESSAGE_ID_1 = generateGuid();
-      const MESSAGE_ID_2 = generateGuid();
-      const MESSAGE_ID_3 = generateGuid();
+      const MESSAGE_ID_1 = crypto.randomUUID();
+      const MESSAGE_ID_2 = crypto.randomUUID();
+      const MESSAGE_ID_3 = crypto.randomUUID();
 
-      const CONVERSATION_ID_1 = generateGuid();
-      const CONVERSATION_ID_2 = generateGuid();
+      const CONVERSATION_ID_1 = crypto.randomUUID();
+      const CONVERSATION_ID_2 = crypto.randomUUID();
 
       insertJob(db, {
         id: 'id-1',
@@ -3184,7 +3184,7 @@ describe('SQL migrations test', () => {
         body: string;
         bodyRanges: Array<unknown>;
       }> = {
-        id: id ?? generateGuid(),
+        id: id ?? crypto.randomUUID(),
         body: `Message body: ${id}`,
       };
       if (mentions) {

@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import { times } from 'lodash';
-import { v4 as uuid } from 'uuid';
+
 import type { LastMessageStatus } from '../../model-types.d';
 import { MINUTE, SECOND } from '../../util/durations';
 import type { MaybeMessageTimelineItemType } from '../../util/timelineUtil';
@@ -20,7 +20,7 @@ describe('<Timeline> utilities', () => {
     const defaultNewer: MaybeMessageTimelineItemType = {
       type: 'message' as const,
       data: {
-        author: { id: uuid() },
+        author: { id: crypto.randomUUID() },
         timestamp: new Date(1998, 10, 21, 12, 34, 56, 123).valueOf(),
         status: 'delivered',
       },
@@ -43,7 +43,7 @@ describe('<Timeline> utilities', () => {
     it("returns false if authors don't match", () => {
       const older = {
         ...defaultOlder,
-        data: { ...defaultOlder.data, author: { id: uuid() } },
+        data: { ...defaultOlder.data, author: { id: crypto.randomUUID() } },
       };
 
       assert.isFalse(areMessagesInSameGroup(older, false, defaultNewer));
@@ -111,7 +111,7 @@ describe('<Timeline> utilities', () => {
     const defaultNewer: MaybeMessageTimelineItemType = {
       type: 'message' as const,
       data: {
-        author: { id: uuid() },
+        author: { id: crypto.randomUUID() },
         timestamp: new Date(1998, 10, 21, 12, 34, 56, 123).valueOf(),
         status: 'delivered',
       },
@@ -119,7 +119,7 @@ describe('<Timeline> utilities', () => {
     const defaultCurrent: MaybeMessageTimelineItemType = {
       type: 'message' as const,
       data: {
-        author: { id: uuid() },
+        author: { id: crypto.randomUUID() },
         timestamp: defaultNewer.data.timestamp - MINUTE,
         status: 'delivered',
       },
@@ -208,7 +208,7 @@ describe('<Timeline> utilities', () => {
   });
 
   describe('getScrollAnchorBeforeUpdate', () => {
-    const fakeItems = (count: number) => times(count, () => uuid());
+    const fakeItems = (count: number) => times(count, () => crypto.randomUUID());
 
     const defaultProps = {
       haveNewest: true,
@@ -398,7 +398,7 @@ describe('<Timeline> utilities', () => {
     describe('when a new message comes in', () => {
       const oldItems = fakeItems(5);
       const prevProps = { ...defaultProps, items: oldItems };
-      const props = { ...defaultProps, items: [...oldItems, uuid()] };
+      const props = { ...defaultProps, items: [...oldItems, crypto.randomUUID()] };
 
       it('does nothing if not scrolled to the bottom', () => {
         const isAtBottom = false;

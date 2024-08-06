@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 
@@ -73,7 +73,7 @@ describe('sql/getCallHistoryGroups', () => {
 
   it('should merge related items in order', async () => {
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     function toCall(callId: string, timestamp: number) {
       return {
@@ -108,7 +108,7 @@ describe('sql/getCallHistoryGroups', () => {
 
   it('should separate unrelated items in order', async () => {
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     function toCall(callId: string, timestamp: number, type: CallType) {
       return {
@@ -143,7 +143,7 @@ describe('sql/getCallHistoryGroups', () => {
 
   it('should split groups that are contiguous', async () => {
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     function toCall(callId: string, timestamp: number, type: CallType) {
       return {
@@ -261,7 +261,7 @@ describe('sql/getCallHistoryGroups', () => {
   it('should support legacy call history with conversation.id', async () => {
     const now = Date.now();
 
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     const conversation: ConversationAttributesType = {
       type: 'private',
@@ -298,7 +298,7 @@ describe('sql/getCallHistoryGroups', () => {
 
   it('should support Missed status filter', async () => {
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     function toCall(
       callId: string,
@@ -343,7 +343,7 @@ describe('sql/getCallHistoryGroups', () => {
 
   it('should only return the newest call for an adhoc call roomId', async () => {
     const now = Date.now();
-    const roomId = generateUuid();
+    const roomId = crypto.randomUUID();
 
     function toCall(callId: string, timestamp: number) {
       return {
@@ -495,7 +495,7 @@ describe('sql/getCallHistoryGroupsCount', () => {
 
   it('counts', async () => {
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
 
     function toCall(callId: string, timestamp: number, type: CallType) {
       return {
@@ -531,8 +531,8 @@ describe('sql/getCallHistoryGroupsCount', () => {
 
   it('should only count each call link roomId once if it had multiple calls', async () => {
     const now = Date.now();
-    const roomId1 = generateUuid();
-    const roomId2 = generateUuid();
+    const roomId1 = crypto.randomUUID();
+    const roomId2 = crypto.randomUUID();
 
     function toCall(callId: string, roomId: string, timestamp: number) {
       return {

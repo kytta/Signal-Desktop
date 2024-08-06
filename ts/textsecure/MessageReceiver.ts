@@ -5,7 +5,6 @@
 
 import { isBoolean, isNumber, isString, noop, omit } from 'lodash';
 import PQueue from 'p-queue';
-import { v4 as getGuid } from 'uuid';
 
 import type {
   SealedSenderDecryptionResult,
@@ -425,7 +424,7 @@ export default class MessageReceiver
         const envelope: ProcessedEnvelope = {
           // Make non-private envelope IDs dashless so they don't get redacted
           //   from logs
-          id: getGuid().replace(/-/g, ''),
+          id: crypto.randomUUID().replace(/-/g, ''),
           receivedAtCounter: incrementMessageCounter(),
           receivedAtDate: Date.now(),
           // Calculate the message age (time on server).
@@ -455,7 +454,7 @@ export default class MessageReceiver
               : undefined,
           timestamp: decoded.timestamp?.toNumber() ?? 0,
           content: dropNull(decoded.content),
-          serverGuid: decoded.serverGuid ?? getGuid(),
+          serverGuid: decoded.serverGuid ?? crypto.randomUUID(),
           serverTimestamp,
           urgent: isBoolean(decoded.urgent) ? decoded.urgent : true,
           story: decoded.story ?? false,
@@ -931,7 +930,7 @@ export default class MessageReceiver
           : undefined,
         timestamp: decoded.timestamp?.toNumber() ?? 0,
         content: dropNull(decoded.content),
-        serverGuid: decoded.serverGuid ?? getGuid(),
+        serverGuid: decoded.serverGuid ?? crypto.randomUUID(),
         serverTimestamp:
           item.serverTimestamp || decoded.serverTimestamp?.toNumber() || 0,
         urgent: isBoolean(item.urgent) ? item.urgent : true,

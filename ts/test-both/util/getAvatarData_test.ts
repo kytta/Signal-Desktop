@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as uuid } from 'uuid';
+
 import { getRandomColor } from '../helpers/getRandomColor';
 
 import { getAvatarData } from '../../util/getAvatarData';
@@ -11,12 +11,12 @@ describe('getAvatarData', () => {
   it('returns existing avatars if present', () => {
     const avatars = [
       {
-        id: uuid(),
+        id: crypto.randomUUID(),
         color: getRandomColor(),
         text: 'Avatar A',
       },
       {
-        id: uuid(),
+        id: crypto.randomUUID(),
         color: getRandomColor(),
         text: 'Avatar B',
       },

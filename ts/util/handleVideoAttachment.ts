@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { blobToArrayBuffer } from 'blob-util';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { makeVideoScreenshot } from '../types/VisualAttachment';
 import { IMAGE_PNG, stringToMIMEType } from '../types/MIME';
@@ -21,7 +21,7 @@ export async function handleVideoAttachment(
     const data = await fileToBytes(file);
     const attachment: InMemoryAttachmentDraftType = {
       contentType: stringToMIMEType(file.type),
-      clientUuid: generateUuid(),
+      clientUuid: crypto.randomUUID(),
       data,
       fileName: file.name,
       path: file.name,

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
+
 
 import { jsonToObject, sql } from '../../sql/util';
 import { CallMode } from '../../types/Calling';
@@ -60,7 +60,7 @@ describe('SQL/updateToSchemaVersion89', () => {
     return {
       eraId: options.eraId,
       callMode: options.noCallMode ? undefined : CallMode.Group,
-      creatorUuid: generateGuid(),
+      creatorUuid: crypto.randomUUID(),
       startedTime: options.noTimestamps ? undefined : Date.now(),
     };
   }
@@ -117,13 +117,13 @@ describe('SQL/updateToSchemaVersion89', () => {
     type: 'private' | 'group',
     discoveredUnregisteredAt?: number
   ) {
-    const id = generateGuid();
+    const id = crypto.randomUUID();
     const serviceId =
       // Emulate older unregistered conversations
       type === 'private' && discoveredUnregisteredAt == null
-        ? generateGuid()
+        ? crypto.randomUUID()
         : null;
-    const groupId = type === 'group' ? generateGuid() : null;
+    const groupId = type === 'group' ? crypto.randomUUID() : null;
 
     const json = JSON.stringify({
       type,
@@ -167,7 +167,7 @@ describe('SQL/updateToSchemaVersion89', () => {
     const eraId2 = 'abc';
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation1.id,
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: callId1,
@@ -175,7 +175,7 @@ describe('SQL/updateToSchemaVersion89', () => {
     });
 
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation2.id,
       callHistoryDetails: getGroupCallHistoryDetails({
         eraId: eraId2,
@@ -196,7 +196,7 @@ describe('SQL/updateToSchemaVersion89', () => {
 
     const conversation = createConversation('private');
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation.id,
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: null, // no id
@@ -217,7 +217,7 @@ describe('SQL/updateToSchemaVersion89', () => {
     const conversation1 = createConversation('private');
     const conversation2 = createConversation('group');
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation1.id,
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: null, // no id
@@ -225,7 +225,7 @@ describe('SQL/updateToSchemaVersion89', () => {
       }),
     });
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation2.id,
       callHistoryDetails: getGroupCallHistoryDetails({
         eraId: 'abc',
@@ -247,14 +247,14 @@ describe('SQL/updateToSchemaVersion89', () => {
 
     const conversation = createConversation('private');
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation.id, // same conversation
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: '123', // same callId
       }),
     });
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation.id, // same conversation
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: '123', // same callId
@@ -273,14 +273,14 @@ describe('SQL/updateToSchemaVersion89', () => {
     const conversation1 = createConversation('private');
     const conversation2 = createConversation('group');
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation1.id,
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: '123',
       }),
     });
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation2.id,
       callHistoryDetails: getGroupCallHistoryDetails({
         eraId: 'abc',
@@ -300,7 +300,7 @@ describe('SQL/updateToSchemaVersion89', () => {
 
     const conversation = createConversation('private', Date.now());
     createCallHistoryMessage({
-      messageId: generateGuid(),
+      messageId: crypto.randomUUID(),
       conversationId: conversation.id,
       callHistoryDetails: getDirectCallHistoryDetails({
         callId: '123',
@@ -344,7 +344,7 @@ describe('SQL/updateToSchemaVersion89', () => {
 
     for (const [id, timestamps] of Object.entries(timestampCases)) {
       createCallHistoryMessage({
-        messageId: generateGuid(),
+        messageId: crypto.randomUUID(),
         conversationId: conversation.id,
         callHistoryDetails: getDirectCallHistoryDetails({
           callId: id,
@@ -353,7 +353,7 @@ describe('SQL/updateToSchemaVersion89', () => {
         timestamps,
       });
       createCallHistoryMessage({
-        messageId: generateGuid(),
+        messageId: crypto.randomUUID(),
         conversationId: conversation.id,
         callHistoryDetails: getGroupCallHistoryDetails({
           eraId: id,
@@ -490,7 +490,7 @@ describe('SQL/updateToSchemaVersion89', () => {
       });
 
       createCallHistoryMessage({
-        messageId: generateGuid(),
+        messageId: crypto.randomUUID(),
         conversationId: conversation.id,
         callHistoryDetails: getDirectCallHistoryDetails({
           callId: '123',

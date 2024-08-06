@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import * as moment from 'moment';
-import { v4 as uuid } from 'uuid';
+
 import { SendStatus } from '../../../messages/MessageSendState';
 import type {
   MessageAttributesType,
@@ -31,7 +31,7 @@ describe('state/selectors/messages', () => {
   let ourConversationId: string;
 
   beforeEach(() => {
-    ourConversationId = uuid();
+    ourConversationId = crypto.randomUUID();
   });
 
   describe('cleanBodyForDirectionCheck', () => {
@@ -88,7 +88,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Read,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Delivered,
             updatedAt: Date.now(),
           },
@@ -108,7 +108,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Read,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Delivered,
             updatedAt: Date.now(),
           },
@@ -128,7 +128,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Failed,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
@@ -148,11 +148,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Delivered,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Failed,
             updatedAt: Date.now(),
           },
@@ -202,7 +202,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
@@ -238,11 +238,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
@@ -268,7 +268,7 @@ describe('state/selectors/messages', () => {
 
   describe('canReply', () => {
     const defaultConversation: ConversationType = {
-      id: uuid(),
+      id: crypto.randomUUID(),
       type: 'direct',
       title: 'Test conversation',
       isMe: false,
@@ -312,7 +312,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
@@ -348,11 +348,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
@@ -423,11 +423,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Delivered,
             updatedAt: Date.now(),
           },
@@ -448,11 +448,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
@@ -488,11 +488,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Viewed,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Read,
             updatedAt: Date.now(),
           },
@@ -511,7 +511,7 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Read,
             updatedAt: Date.now(),
           },
@@ -530,15 +530,15 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Delivered,
             updatedAt: Date.now(),
           },
@@ -558,11 +558,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
@@ -582,11 +582,11 @@ describe('state/selectors/messages', () => {
             status: SendStatus.Sent,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },
-          [uuid()]: {
+          [crypto.randomUUID()]: {
             status: SendStatus.Pending,
             updatedAt: Date.now(),
           },

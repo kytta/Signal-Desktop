@@ -1,7 +1,6 @@
 // Copyright 2024 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as uuid } from 'uuid';
 import React, { useMemo, useCallback } from 'react';
 
 import type { LocalizerType } from '../types/Util';
@@ -19,7 +18,7 @@ export function CollidingAvatars({
   i18n,
   conversations,
 }: PropsType): JSX.Element {
-  const clipId = useMemo(() => uuid(), []);
+  const clipId = useMemo(() => crypto.randomUUID(), []);
   const onRef = useCallback(
     (elem: HTMLDivElement | null): void => {
       if (elem) {

@@ -1,7 +1,7 @@
 // Copyright 2024 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateGuid } from 'uuid';
+
 import { BackupLevel } from '@signalapp/libsignal-client/zkgroup';
 import { omit } from 'lodash';
 import * as sinon from 'sinon';
@@ -84,7 +84,7 @@ describe('backup/attachments', () => {
     return {
       cdnKey: `cdnKey${index}`,
       cdnNumber: 3,
-      clientUuid: generateGuid(),
+      clientUuid: crypto.randomUUID(),
       key: getBase64(`key${index}`),
       digest: getBase64(`digest${index}`),
       iv: getBase64(`iv${index}`),
@@ -109,7 +109,7 @@ describe('backup/attachments', () => {
   ): MessageAttributesType {
     return {
       conversationId: contactA.id,
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       type: 'incoming',
       received_at: timestamp,
       received_at_ms: timestamp,

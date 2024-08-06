@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 import { action } from '@storybook/addon-actions';
 import { noop } from 'lodash';
 
@@ -33,7 +32,7 @@ function getDefaultProps(): PropsType {
     i18n,
     label: 'A story',
     queueStoryDownload: action('queueStoryDownload'),
-    storyId: uuid(),
+    storyId: crypto.randomUUID(),
     onMediaPlaybackStart: noop,
   };
 }

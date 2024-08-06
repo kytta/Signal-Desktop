@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 
 import { normalizeAci } from '../../util/normalizeAci';
 import type { WritableDB } from '../../sql/Interface';
@@ -12,11 +11,11 @@ describe('SQL/updateToSchemaVersion1020', () => {
   let db: WritableDB;
 
   const OUR_ACI = normalizeAci(
-    generateGuid(),
+    crypto.randomUUID(),
     'updateToSchemaVersion1020 test'
   );
   const THEIR_ACI = normalizeAci(
-    generateGuid(),
+    crypto.randomUUID(),
     'updateToSchemaVersion1020 test'
   );
 

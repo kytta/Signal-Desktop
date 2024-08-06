@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
+
 
 import {
   getAllSyncTasks,
@@ -46,8 +46,8 @@ describe('SQL/updateToSchemaVersion1060', () => {
   describe('Addressable Messages', () => {
     describe('Storing of new attachment jobs', () => {
       it('returns only incoming/outgoing messages', () => {
-        const conversationId = generateGuid();
-        const otherConversationId = generateGuid();
+        const conversationId = crypto.randomUUID();
+        const otherConversationId = crypto.randomUUID();
 
         insertData(db, 'messages', [
           generateMessage({
@@ -178,7 +178,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
       const now = Date.now();
       const expected: Array<SyncTaskType> = [
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: 1,
           createdAt: now + 1,
           data: {
@@ -190,7 +190,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
           type: 'delete-conversation',
         },
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: 2,
           createdAt: now + 2,
           data: {
@@ -202,7 +202,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
           type: 'delete-conversation',
         },
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: 3,
           createdAt: now + 3,
           data: {
@@ -238,7 +238,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
       const twoWeeksAgo = now - WEEK * 2;
       const expected: Array<SyncTaskType> = [
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: MAX_SYNC_TASK_ATTEMPTS,
           createdAt: twoWeeksAgo,
           data: {
@@ -250,7 +250,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
           type: 'delete-conversation',
         },
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: 2,
           createdAt: twoWeeksAgo,
           data: {
@@ -262,7 +262,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
           type: 'delete-conversation',
         },
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: MAX_SYNC_TASK_ATTEMPTS * 2,
           createdAt: now,
           data: {
@@ -274,7 +274,7 @@ describe('SQL/updateToSchemaVersion1060', () => {
           type: 'delete-conversation',
         },
         {
-          id: generateGuid(),
+          id: crypto.randomUUID(),
           attempts: MAX_SYNC_TASK_ATTEMPTS - 1,
           createdAt: now + 1,
           data: {

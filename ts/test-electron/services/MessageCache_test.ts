@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as uuid } from 'uuid';
+
 import type { MessageAttributesType } from '../../model-types.d';
 import { DataReader, DataWriter } from '../../sql/Client';
 import { MessageModel } from '../../models/messages';
@@ -31,7 +31,7 @@ describe('MessageCache', () => {
       let message1 = new MessageModel({
         conversationId: 'xyz',
         body: 'message1',
-        id: uuid(),
+        id: crypto.randomUUID(),
         received_at: 1,
         sent_at: 1234,
         timestamp: 9999,
@@ -40,7 +40,7 @@ describe('MessageCache', () => {
       let message2 = new MessageModel({
         conversationId: 'xyz',
         body: 'message2',
-        id: uuid(),
+        id: crypto.randomUUID(),
         received_at: 2,
         sent_at: 1234,
         timestamp: 9999,
@@ -49,7 +49,7 @@ describe('MessageCache', () => {
       const message3 = new MessageModel({
         conversationId: 'xyz',
         body: 'message3',
-        id: uuid(),
+        id: crypto.randomUUID(),
         received_at: 3,
         sent_at: 5678,
         timestamp: 9999,
@@ -86,7 +86,7 @@ describe('MessageCache', () => {
     it('backbone to redux', () => {
       const message1 = new MessageModel({
         conversationId: 'xyz',
-        id: uuid(),
+        id: crypto.randomUUID(),
         body: 'test1',
         received_at: 1,
         sent_at: Date.now(),
@@ -153,7 +153,7 @@ describe('MessageCache', () => {
     it('redux to backbone (working with models)', () => {
       const message = new MessageModel({
         conversationId: 'xyz',
-        id: uuid(),
+        id: crypto.randomUUID(),
         body: 'test1',
         received_at: 1,
         sent_at: Date.now(),
@@ -236,8 +236,8 @@ describe('MessageCache', () => {
         const mc = new MessageCache();
 
         const messageAttributes: MessageAttributesType = {
-          conversationId: uuid(),
-          id: uuid(),
+          conversationId: crypto.randomUUID(),
+          id: crypto.randomUUID(),
           received_at: 1,
           sent_at: Date.now(),
           timestamp: Date.now(),
@@ -323,8 +323,8 @@ describe('MessageCache', () => {
       const mc = new MessageCache();
 
       const messageAttributes: MessageAttributesType = {
-        conversationId: uuid(),
-        id: uuid(),
+        conversationId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         received_at: 1,
         sent_at: Date.now(),
         timestamp: Date.now(),
@@ -346,7 +346,7 @@ describe('MessageCache', () => {
         'attributes returned are not the same references'
       );
 
-      const undefinedMessage = mc.accessAttributes(uuid());
+      const undefinedMessage = mc.accessAttributes(crypto.randomUUID());
       assert.isUndefined(undefinedMessage, 'access did not find message');
     });
   });
@@ -356,9 +356,9 @@ describe('MessageCache', () => {
       const mc = new MessageCache();
 
       const ourAci = generateAci();
-      const id = uuid();
+      const id = crypto.randomUUID();
       const messageAttributes: MessageAttributesType = {
-        conversationId: uuid(),
+        conversationId: crypto.randomUUID(),
         id,
         received_at: 1,
         sent_at: Date.now(),
@@ -397,8 +397,8 @@ describe('MessageCache', () => {
       const mc = new MessageCache();
 
       const messageAttributes: MessageAttributesType = {
-        conversationId: uuid(),
-        id: uuid(),
+        conversationId: crypto.randomUUID(),
+        id: crypto.randomUUID(),
         received_at: 1,
         sent_at: Date.now(),
         timestamp: Date.now(),
@@ -424,7 +424,7 @@ describe('MessageCache', () => {
       );
 
       assert.throws(() => {
-        mc.accessAttributesOrThrow('tests.2', uuid());
+        mc.accessAttributesOrThrow('tests.2', crypto.randomUUID());
       });
     });
   });

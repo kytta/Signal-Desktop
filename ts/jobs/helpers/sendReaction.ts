@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { isNumber } from 'lodash';
-import { v4 as generateUuid } from 'uuid';
 
 import * as Errors from '../../types/errors';
 import { strictAssert } from '../../util/assert';
@@ -159,7 +158,7 @@ export async function sendReaction(
       remove: !emoji,
     };
     const ephemeralMessageForReactionSend = new window.Whisper.Message({
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       type: 'outgoing',
       conversationId: conversation.get('id'),
       sent_at: pendingReaction.timestamp,

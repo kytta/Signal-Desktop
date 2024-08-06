@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 import sinon from 'sinon';
 import { DataWriter } from '../sql/Client';
 import { ConversationModel } from '../models/conversations';
@@ -129,7 +129,7 @@ describe('updateConversationsWithUuidLookup', () => {
     attributes: Readonly<Partial<ConversationAttributesType>> = {}
   ): ConversationModel {
     return new ConversationModel({
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       inbox_position: 0,
       isPinned: false,
       lastMessageDeletedForEveryone: false,

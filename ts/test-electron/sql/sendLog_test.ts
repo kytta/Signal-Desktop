@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -43,7 +43,7 @@ describe('sql/sendLog', () => {
       hasPniSignatureMessage: false,
     };
     await insertSentProto(proto, {
-      messageIds: [generateUuid()],
+      messageIds: [crypto.randomUUID()],
       recipients: {
         [generateAci()]: [1, 2],
       },
@@ -82,7 +82,7 @@ describe('sql/sendLog', () => {
       hasPniSignatureMessage: true,
     };
     await insertSentProto(proto, {
-      messageIds: [generateUuid(), generateUuid()],
+      messageIds: [crypto.randomUUID(), crypto.randomUUID()],
       recipients: {
         [generateAci()]: [1, 2],
         [generateAci()]: [1],
@@ -113,7 +113,7 @@ describe('sql/sendLog', () => {
   });
 
   it('trigger deletes payload when referenced message is deleted', async () => {
-    const id = generateUuid();
+    const id = crypto.randomUUID();
     const timestamp = Date.now();
     const ourAci = generateAci();
 
@@ -122,7 +122,7 @@ describe('sql/sendLog', () => {
         id,
 
         body: 'some text',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         received_at: timestamp,
         sent_at: timestamp,
         timestamp,
@@ -161,7 +161,7 @@ describe('sql/sendLog', () => {
     it('supports adding duplicates', async () => {
       const timestamp = Date.now();
 
-      const messageIds = [generateUuid()];
+      const messageIds = [crypto.randomUUID()];
       const recipients = {
         [generateAci()]: [1],
       };
@@ -202,7 +202,7 @@ describe('sql/sendLog', () => {
     it('handles duplicates, adding new recipients if needed', async () => {
       const timestamp = Date.now();
 
-      const messageIds = [generateUuid()];
+      const messageIds = [crypto.randomUUID()];
       const proto = {
         contentHint: 1,
         proto: getRandomBytes(128),
@@ -265,19 +265,19 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto1, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [generateAci()]: [1],
         },
       });
       await insertSentProto(proto2, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [generateAci()]: [1, 2],
         },
       });
       await insertSentProto(proto3, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [generateAci()]: [1, 2, 3],
         },
@@ -308,7 +308,7 @@ describe('sql/sendLog', () => {
       assert.lengthOf(await _getAllSentProtoMessageIds(), 0);
       assert.lengthOf(await _getAllSentProtoRecipients(), 0);
 
-      const messageId = generateUuid();
+      const messageId = crypto.randomUUID();
       const timestamp = Date.now();
       const proto1 = {
         contentHint: 1,
@@ -332,7 +332,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto1, {
-        messageIds: [messageId, generateUuid()],
+        messageIds: [messageId, crypto.randomUUID()],
         recipients: {
           [generateAci()]: [1, 2],
           [generateAci()]: [1],
@@ -345,7 +345,7 @@ describe('sql/sendLog', () => {
         },
       });
       await insertSentProto(proto3, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [generateAci()]: [1],
         },
@@ -377,7 +377,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId1]: [1, 2],
           [recipientServiceId2]: [1],
@@ -411,7 +411,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId1]: [1, 2],
           [recipientServiceId2]: [1],
@@ -471,7 +471,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: true,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId1]: [1, 2],
           [recipientServiceId2]: [1],
@@ -535,7 +535,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId1]: [1, 2],
           [recipientServiceId2]: [1],
@@ -574,7 +574,7 @@ describe('sql/sendLog', () => {
       const timestamp = Date.now();
 
       const recipientServiceId = generateAci();
-      const messageIds = [generateUuid(), generateUuid()];
+      const messageIds = [crypto.randomUUID(), crypto.randomUUID()];
       const proto = {
         contentHint: 1,
         proto: getRandomBytes(128),
@@ -657,7 +657,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId]: [1, 2],
         },
@@ -687,7 +687,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId]: [1, 2],
         },
@@ -718,7 +718,7 @@ describe('sql/sendLog', () => {
         hasPniSignatureMessage: false,
       };
       await insertSentProto(proto, {
-        messageIds: [generateUuid()],
+        messageIds: [crypto.randomUUID()],
         recipients: {
           [recipientServiceId]: [1, 2],
         },

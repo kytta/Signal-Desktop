@@ -1,7 +1,7 @@
 // Copyright 2023 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as generateUuid } from 'uuid';
+
 
 import type { DraftBodyRanges } from '../types/BodyRange';
 import type { LinkPreviewType } from '../types/message/LinkPreviews';
@@ -185,7 +185,7 @@ export async function sendEditedMessage(
         image,
       };
     }),
-    id: generateUuid(),
+    id: crypto.randomUUID(),
     quote,
     received_at: incrementMessageCounter(),
     received_at_ms: timestamp,

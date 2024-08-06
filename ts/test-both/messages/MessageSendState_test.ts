@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import { sampleSize, times } from 'lodash';
-import { v4 as uuid } from 'uuid';
+
 
 import type {
   SendAction,
@@ -126,7 +126,7 @@ describe('message send state utilities', () => {
   });
 
   describe('someRecipientSendStatus', () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
     it('returns false if there are no send states', () => {
       const alwaysTrue = () => true;
       assert.isFalse(
@@ -187,7 +187,7 @@ describe('message send state utilities', () => {
   });
 
   describe('someSendStatus', () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
     it('returns false if there are no send states', () => {
       const alwaysTrue = () => true;
       assert.isFalse(someSendStatus({}, alwaysTrue));
@@ -243,7 +243,7 @@ describe('message send state utilities', () => {
   });
 
   describe('getHighestSuccessfulRecipientStatus', () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
     it('returns pending if the conversation has an empty send state', () => {
       assert.equal(
         getHighestSuccessfulRecipientStatus({}, ourConversationId),
@@ -277,7 +277,7 @@ describe('message send state utilities', () => {
   });
 
   describe('isMessageJustForMe', () => {
-    const ourConversationId = uuid();
+    const ourConversationId = crypto.randomUUID();
 
     it('returns false if the conversation has an empty send state', () => {
       assert.isFalse(isMessageJustForMe({}, ourConversationId));
@@ -291,7 +291,7 @@ describe('message send state utilities', () => {
               status: SendStatus.Sent,
               updatedAt: 123,
             },
-            [uuid()]: {
+            [crypto.randomUUID()]: {
               status: SendStatus.Pending,
               updatedAt: 123,
             },
@@ -303,7 +303,7 @@ describe('message send state utilities', () => {
       assert.isFalse(
         isMessageJustForMe(
           {
-            [uuid()]: {
+            [crypto.randomUUID()]: {
               status: SendStatus.Pending,
               updatedAt: 123,
             },
@@ -319,7 +319,7 @@ describe('message send state utilities', () => {
       assert.isFalse(
         isMessageJustForMe(
           {
-            [uuid()]: {
+            [crypto.randomUUID()]: {
               status: SendStatus.Pending,
               updatedAt: 123,
             },

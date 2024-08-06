@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import PQueue from 'p-queue';
-import { v4 as uuid } from 'uuid';
 import { noop } from 'lodash';
 
 import { Job } from './Job';
@@ -185,7 +184,7 @@ export abstract class JobQueue<T> {
   }
 
   protected createJob(data: Readonly<T>): Job<T> {
-    const id = uuid();
+    const id = crypto.randomUUID();
     const timestamp = Date.now();
 
     const completionPromise = new Promise<void>((resolve, reject) => {

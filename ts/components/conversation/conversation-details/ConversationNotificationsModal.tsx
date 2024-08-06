@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import React, { useMemo, useState } from 'react';
-import uuid from 'uuid';
 
 import type { LocalizerType } from '../../../types/Util';
 import { getMuteOptions } from '../../../util/getMuteOptions';
@@ -53,7 +52,7 @@ export function ConversationNotificationsModal({
   };
 
   const htmlIds = useMemo(() => {
-    return Array.from({ length: muteOptions.length }, () => uuid());
+    return Array.from({ length: muteOptions.length }, () => crypto.randomUUID());
   }, [muteOptions.length]);
 
   return (

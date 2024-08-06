@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import * as sinon from 'sinon';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { times } from 'lodash';
 import { ConversationModel } from '../models/conversations';
@@ -29,12 +29,12 @@ describe('routineProfileRefresh', () => {
     overrideAttributes: Partial<ConversationAttributesType> = {}
   ): ConversationModel {
     const result = new ConversationModel({
-      accessKey: generateUuid(),
+      accessKey: crypto.randomUUID(),
       active_at: Date.now(),
       draftAttachments: [],
       draftBodyRanges: [],
       draftTimestamp: null,
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       inbox_position: 0,
       isPinned: false,
       lastMessageDeletedForEveryone: false,
@@ -46,7 +46,7 @@ describe('routineProfileRefresh', () => {
       messageRequestResponseType: 0,
       muteExpiresAt: 0,
       profileAvatar: undefined,
-      profileKeyCredential: generateUuid(),
+      profileKeyCredential: crypto.randomUUID(),
       profileKeyCredentialExpiration: Date.now() + 2 * DAY,
       profileSharing: true,
       quotedMessageId: null,
@@ -88,7 +88,7 @@ describe('routineProfileRefresh', () => {
 
     await routineProfileRefresh({
       allConversations: [conversation1, conversation2],
-      ourConversationId: generateUuid(),
+      ourConversationId: crypto.randomUUID(),
       storage,
       getProfileFn,
       id: 1,
@@ -104,7 +104,7 @@ describe('routineProfileRefresh', () => {
 
     await routineProfileRefresh({
       allConversations: [conversation1, conversation2],
-      ourConversationId: generateUuid(),
+      ourConversationId: crypto.randomUUID(),
       storage: makeStorage(),
       getProfileFn,
       id: 1,
@@ -133,7 +133,7 @@ describe('routineProfileRefresh', () => {
 
     await routineProfileRefresh({
       allConversations: [normal, recentlyFetched, unregisteredAndStale],
-      ourConversationId: generateUuid(),
+      ourConversationId: crypto.randomUUID(),
       storage: makeStorage(),
       getProfileFn,
       id: 1,
@@ -228,7 +228,7 @@ describe('routineProfileRefresh', () => {
         refreshedTwoDaysAgo,
         refreshedThreeDaysAgo,
       ],
-      ourConversationId: generateUuid(),
+      ourConversationId: crypto.randomUUID(),
       storage: makeStorage(),
       getProfileFn,
       id: 1,

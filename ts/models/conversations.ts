@@ -3,7 +3,6 @@
 
 import { compact, has, isNumber, throttle, debounce } from 'lodash';
 import { batch as batchDispatch } from 'react-redux';
-import { v4 as generateGuid } from 'uuid';
 import PQueue from 'p-queue';
 
 import type { ReadonlyDeep } from 'type-fest';
@@ -345,7 +344,7 @@ export class ConversationModel extends window.Backbone
     }
 
     if (isValidE164(attributes.id, false)) {
-      this.set({ id: generateGuid(), e164: attributes.id });
+      this.set({ id: crypto.randomUUID(), e164: attributes.id });
     }
 
     this.storeName = 'conversations';
@@ -2162,7 +2161,7 @@ export class ConversationModel extends window.Backbone
         : lastMessageTimestamp;
 
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'message-request-response-event',
       sent_at: maybeLastMessageTimestamp,
@@ -2919,7 +2918,7 @@ export class ConversationModel extends window.Backbone
     });
 
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'chat-session-refreshed',
       timestamp: receivedAt,
@@ -2967,7 +2966,7 @@ export class ConversationModel extends window.Backbone
     }
 
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'delivery-issue',
       sourceServiceId: senderAci,
@@ -3017,7 +3016,7 @@ export class ConversationModel extends window.Backbone
 
       const timestamp = Date.now();
       const message: MessageAttributesType = {
-        id: generateGuid(),
+        id: crypto.randomUUID(),
         conversationId: this.id,
         type: 'keychange',
         sent_at: timestamp,
@@ -3079,7 +3078,7 @@ export class ConversationModel extends window.Backbone
 
     const timestamp = Date.now();
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'conversation-merge',
       sent_at: timestamp,
@@ -3128,7 +3127,7 @@ export class ConversationModel extends window.Backbone
     log.info(`${logId}: adding notification`);
     const timestamp = Date.now();
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'phone-number-discovery',
       sent_at: timestamp,
@@ -3177,7 +3176,7 @@ export class ConversationModel extends window.Backbone
 
     const timestamp = Date.now();
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       local: Boolean(options.local),
       readStatus: ReadStatus.Read,
@@ -3222,7 +3221,7 @@ export class ConversationModel extends window.Backbone
   ): Promise<void> {
     const now = Date.now();
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type: 'profile-change',
       sent_at: now,
@@ -3266,7 +3265,7 @@ export class ConversationModel extends window.Backbone
   ): Promise<string> {
     const now = Date.now();
     const message: MessageAttributesType = {
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       conversationId: this.id,
       type,
       sent_at: now,
@@ -3935,7 +3934,7 @@ export class ConversationModel extends window.Backbone
 
     // Here we move attachments to disk
     const attributes = await upgradeMessageSchema({
-      id: generateGuid(),
+      id: crypto.randomUUID(),
       timestamp: now,
       type: 'outgoing',
       body,
@@ -4540,7 +4539,7 @@ export class ConversationModel extends window.Backbone
     const shouldBeRead =
       (isInitialSync && isFromSyncOperation) || isFromMe || isNoteToSelf;
 
-    const id = generateGuid();
+    const id = crypto.randomUUID();
     const attributes = {
       id,
       conversationId: this.id,

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import {
   ComposerStep,
@@ -1170,7 +1170,7 @@ describe('both/state/selectors/conversations-extra', () => {
           title: 'No timestamp',
           unreadCount: 1,
           isSelected: false,
-          typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+          typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
           acceptedMessageRequest: true,
         }),
@@ -1191,7 +1191,7 @@ describe('both/state/selectors/conversations-extra', () => {
           title: 'B',
           unreadCount: 1,
           isSelected: false,
-          typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+          typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
           acceptedMessageRequest: true,
         }),
@@ -1212,7 +1212,7 @@ describe('both/state/selectors/conversations-extra', () => {
           title: 'C',
           unreadCount: 1,
           isSelected: false,
-          typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+          typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
           acceptedMessageRequest: true,
         }),
@@ -1233,7 +1233,7 @@ describe('both/state/selectors/conversations-extra', () => {
           title: 'A',
           unreadCount: 1,
           isSelected: false,
-          typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+          typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
           acceptedMessageRequest: true,
         }),
@@ -1254,7 +1254,7 @@ describe('both/state/selectors/conversations-extra', () => {
           title: 'First!',
           unreadCount: 1,
           isSelected: false,
-          typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+          typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
           acceptedMessageRequest: true,
         }),
@@ -1296,7 +1296,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin Two',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1318,7 +1318,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin Three',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1340,7 +1340,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin One',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1379,7 +1379,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin Two',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1400,7 +1400,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin Three',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1421,7 +1421,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin One',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1443,7 +1443,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin One',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),
@@ -1464,7 +1464,7 @@ describe('both/state/selectors/conversations-extra', () => {
             title: 'Pin One',
             unreadCount: 1,
             isSelected: false,
-            typingContactIdTimestamps: { [generateUuid()]: Date.now() },
+            typingContactIdTimestamps: { [crypto.randomUUID()]: Date.now() },
 
             acceptedMessageRequest: true,
           }),

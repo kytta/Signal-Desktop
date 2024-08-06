@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateGuid } from 'uuid';
 import { range } from 'lodash';
 
 import { createDB, insertData, updateToVersion } from './helpers';
@@ -51,11 +50,11 @@ describe('SQL/updateToSchemaVersion87(cleanup)', () => {
   let db: WritableDB;
 
   const OUR_ACI = normalizeAci(
-    generateGuid(),
+    crypto.randomUUID(),
     'updateToSchemaVersion87(cleanup) test'
   );
   const OUR_PNI = normalizePni(
-    `PNI:${generateGuid()}`,
+    `PNI:${crypto.randomUUID()}`,
     'updateToSchemaVersion87(cleanup) test'
   );
   let idCount = 0;

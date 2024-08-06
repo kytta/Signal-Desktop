@@ -1,8 +1,6 @@
 // Copyright 2023 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import { v4 as uuid } from 'uuid';
-
 import { incrementMessageCounter } from '../util/incrementMessageCounter';
 import { ReadStatus } from '../messages/MessageReadStatus';
 import { SendStatus } from '../messages/MessageSendState';
@@ -64,7 +62,7 @@ export async function populateConversationWithMessages({
       bodyRanges: [{ start: 0, length: 7, style: BodyRange.Style.BOLD }],
       attachments: [],
       conversationId,
-      id: uuid(),
+      id: crypto.randomUUID(),
       type: isIncoming ? 'incoming' : 'outgoing',
       timestamp,
       sent_at: timestamp,

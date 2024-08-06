@@ -1,7 +1,7 @@
 // Copyright 2023 Signal Messenger, LLC
 // SPDX-License-Identifier: AGPL-3.0-only
 
-import uuid from 'uuid';
+
 import { assert } from 'chai';
 
 import { type AciString, generateAci } from '../types/ServiceId';
@@ -34,8 +34,8 @@ describe('MessageReceipts', () => {
     type: MessageReceiptType
   ): MessageReceiptAttributesType {
     return {
-      envelopeId: uuid(),
-      syncTaskId: uuid(),
+      envelopeId: crypto.randomUUID(),
+      syncTaskId: crypto.randomUUID(),
       receiptSync: {
         messageSentAt,
         receiptTimestamp: 1,
@@ -48,11 +48,11 @@ describe('MessageReceipts', () => {
     };
   }
   it('processes all receipts in a batch', async () => {
-    const id = uuid();
+    const id = crypto.randomUUID();
     const sentAt = Date.now();
 
     const messageAttributes: MessageAttributesType = {
-      conversationId: uuid(),
+      conversationId: crypto.randomUUID(),
       id,
       received_at: 1,
       sent_at: sentAt,
@@ -108,7 +108,7 @@ describe('MessageReceipts', () => {
   });
 
   it('updates sendStateByConversationId for edits', async () => {
-    const id = uuid();
+    const id = crypto.randomUUID();
     const sentAt = Date.now();
     const editedSentAt = sentAt + 1000;
     const defaultSendState = {
@@ -131,7 +131,7 @@ describe('MessageReceipts', () => {
     };
 
     const messageAttributes: MessageAttributesType = {
-      conversationId: uuid(),
+      conversationId: crypto.randomUUID(),
       id,
       received_at: 1,
       sent_at: sentAt,

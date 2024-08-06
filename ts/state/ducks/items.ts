@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { omit } from 'lodash';
-import { v4 as getGuid } from 'uuid';
 import type { ThunkAction } from 'redux-thunk';
 import type { ReadonlyDeep } from 'type-fest';
 import type { StateType as RootStateType } from '../reducer';
@@ -152,9 +151,9 @@ function addCustomColor(
   return (dispatch, getState) => {
     const { customColors = getDefaultCustomColorData() } = getState().items;
 
-    let uuid = getGuid();
+    let uuid = crypto.randomUUID();
     while (customColors.colors[uuid]) {
-      uuid = getGuid();
+      uuid = crypto.randomUUID();
     }
 
     const nextCustomColors = {

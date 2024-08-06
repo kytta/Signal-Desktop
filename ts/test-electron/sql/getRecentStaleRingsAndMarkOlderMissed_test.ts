@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { times } from 'lodash';
 import { DataReader, DataWriter } from '../../sql/Client';
@@ -59,8 +59,8 @@ describe('sql/getRecentStaleRingsAndMarkOlderMissed', () => {
   }
 
   it('should mark every call but the latest with the same peer as missed', async () => {
-    const peer1 = generateUuid();
-    const peer2 = generateUuid();
+    const peer1 = crypto.randomUUID();
+    const peer2 = crypto.randomUUID();
     const call1 = await makeCall(peer1, '1', GroupCallStatus.Ringing);
     const call2 = await makeCall(peer1, '2', GroupCallStatus.Ringing);
     const call3 = await makeCall(peer2, '3', GroupCallStatus.Ringing);
@@ -83,7 +83,7 @@ describe('sql/getRecentStaleRingsAndMarkOlderMissed', () => {
   it('should mark every ringing call after the first 10 as missed', async () => {
     const calls = await Promise.all(
       times(15, async i => {
-        return makeCall(generateUuid(), String(i), GroupCallStatus.Ringing);
+        return makeCall(crypto.randomUUID(), String(i), GroupCallStatus.Ringing);
       })
     );
 

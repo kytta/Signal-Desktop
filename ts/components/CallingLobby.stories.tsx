@@ -4,7 +4,6 @@
 import * as React from 'react';
 import { times } from 'lodash';
 import { action } from '@storybook/addon-actions';
-import { v4 as generateUuid } from 'uuid';
 
 import type { Meta } from '@storybook/react';
 import { AvatarColors } from '../types/Colors';
@@ -76,7 +75,7 @@ const createProps = (overrideProps: Partial<PropsType> = {}): PropsType => {
       overrideProps.me ||
       getDefaultConversation({
         color: AvatarColors[0],
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         serviceId: generateAci(),
       }),
     onCallCanceled: action('on-call-canceled'),
@@ -131,7 +130,7 @@ export function NoCameraLocalAvatar(): JSX.Element {
     me: getDefaultConversation({
       avatarUrl: '/fixtures/kitten-4-112-112.jpg',
       color: AvatarColors[0],
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       serviceId: generateAci(),
     }),
   });
@@ -173,7 +172,7 @@ export function GroupCallWith1PeekedParticipantSelf(): JSX.Element {
   const props = createProps({
     callMode: CallMode.Group,
     me: getDefaultConversation({
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       serviceId,
     }),
     peekedParticipants: [fakePeekedParticipant({ title: 'Ash', serviceId })],

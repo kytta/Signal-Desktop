@@ -5,7 +5,6 @@ import { ipcRenderer } from 'electron';
 import { isString, isTypedArray } from 'lodash';
 import { join, normalize, basename } from 'path';
 import fse from 'fs-extra';
-import getGuid from 'uuid/v4';
 
 import { isPathInside } from '../util/isPathInside';
 import { writeWindowsZoneIdentifier } from '../util/windowsZoneIdentifier';
@@ -209,7 +208,7 @@ async function writeWithAttributes(
     const timestamp = Math.trunc(Date.now() / 1000).toString(16);
 
     const appName = 'Signal';
-    const guid = getGuid();
+    const guid = crypto.randomUUID();
 
     // https://ilostmynotes.blogspot.com/2012/06/gatekeeper-xprotect-and-quarantine.html
     const attrValue = `${type};${timestamp};${appName};${guid}`;

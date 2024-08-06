@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { v4 as generateUuid } from 'uuid';
+
 
 import type { AttachmentType } from '../../types/Attachment';
 import type { CallbackResultType } from '../../textsecure/Types.d';
@@ -55,7 +55,7 @@ describe('Message', () => {
 
   function createMessage(attrs: Partial<MessageAttributesType>): MessageModel {
     return new window.Whisper.Message({
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       ...attrs,
       received_at: Date.now(),
     } as MessageAttributesType);
@@ -263,19 +263,19 @@ describe('Message', () => {
     let eve: ConversationModel | undefined;
     before(() => {
       alice = window.ConversationController.getOrCreate(
-        generateUuid(),
+        crypto.randomUUID(),
         'private'
       );
       alice.set({ systemGivenName: 'Alice' });
 
       bob = window.ConversationController.getOrCreate(
-        generateUuid(),
+        crypto.randomUUID(),
         'private'
       );
       bob.set({ systemGivenName: 'Bob' });
 
       eve = window.ConversationController.getOrCreate(
-        generateUuid(),
+        crypto.randomUUID(),
         'private'
       );
       eve.set({ systemGivenName: 'Eve' });
@@ -679,7 +679,7 @@ describe('Message', () => {
         createMessage({
           conversationId: (
             await window.ConversationController.getOrCreateAndWait(
-              generateUuid(),
+              crypto.randomUUID(),
               'private'
             )
           ).id,
@@ -703,7 +703,7 @@ describe('Message', () => {
         createMessage({
           conversationId: (
             await window.ConversationController.getOrCreateAndWait(
-              generateUuid(),
+              crypto.randomUUID(),
               'private'
             )
           ).id,
@@ -732,7 +732,7 @@ describe('Message', () => {
         createMessage({
           conversationId: (
             await window.ConversationController.getOrCreateAndWait(
-              generateUuid(),
+              crypto.randomUUID(),
               'private'
             )
           ).id,

@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { v4 as generateUuid } from 'uuid';
+
 import { times } from 'lodash';
 import type { ReadonlyDeep } from 'type-fest';
 
@@ -879,7 +879,7 @@ describe('both/state/ducks/conversations', () => {
           type: SHOW_SEND_ANYWAY_DIALOG,
           payload: {
             untrustedByConversation: {},
-            promiseUuid: generateUuid() as SingleServePromiseIdString,
+            promiseUuid: crypto.randomUUID() as SingleServePromiseIdString,
             source: undefined,
           },
         };
@@ -906,7 +906,7 @@ describe('both/state/ducks/conversations', () => {
                 },
               },
             },
-            promiseUuid: generateUuid() as SingleServePromiseIdString,
+            promiseUuid: crypto.randomUUID() as SingleServePromiseIdString,
             source: undefined,
           },
         };
@@ -959,7 +959,7 @@ describe('both/state/ducks/conversations', () => {
                 },
               },
             },
-            promiseUuid: generateUuid() as SingleServePromiseIdString,
+            promiseUuid: crypto.randomUUID() as SingleServePromiseIdString,
             source: undefined,
           },
         };
@@ -1976,8 +1976,8 @@ describe('both/state/ducks/conversations', () => {
       });
 
       it('shows the recommended group size modal when first crossing the maximum recommended group size', () => {
-        const oldSelectedConversationIds = times(21, () => generateUuid());
-        const newUuid = generateUuid();
+        const oldSelectedConversationIds = times(21, () => crypto.randomUUID());
+        const newUuid = crypto.randomUUID();
 
         const state = {
           ...getEmptyState(),
@@ -1997,8 +1997,8 @@ describe('both/state/ducks/conversations', () => {
       });
 
       it("doesn't show the recommended group size modal twice", () => {
-        const oldSelectedConversationIds = times(21, () => generateUuid());
-        const newUuid = generateUuid();
+        const oldSelectedConversationIds = times(21, () => crypto.randomUUID());
+        const newUuid = crypto.randomUUID();
 
         const state = {
           ...getEmptyState(),
@@ -2038,15 +2038,15 @@ describe('both/state/ducks/conversations', () => {
             ...getEmptyState(),
             composer: defaultChooseGroupMembersComposerState,
           };
-          const action = getAction(generateUuid(), state);
+          const action = getAction(crypto.randomUUID(), state);
 
           assert.strictEqual(action.payload.maxRecommendedGroupSize, 151);
         }
       });
 
       it('shows the maximum group size modal when first reaching the maximum group size', () => {
-        const oldSelectedConversationIds = times(31, () => generateUuid());
-        const newUuid = generateUuid();
+        const oldSelectedConversationIds = times(31, () => crypto.randomUUID());
+        const newUuid = crypto.randomUUID();
 
         const state = {
           ...getEmptyState(),
@@ -2069,8 +2069,8 @@ describe('both/state/ducks/conversations', () => {
       });
 
       it("doesn't show the maximum group size modal twice", () => {
-        const oldSelectedConversationIds = times(31, () => generateUuid());
-        const newUuid = generateUuid();
+        const oldSelectedConversationIds = times(31, () => crypto.randomUUID());
+        const newUuid = crypto.randomUUID();
 
         const state = {
           ...getEmptyState(),
@@ -2097,10 +2097,10 @@ describe('both/state/ducks/conversations', () => {
           ...getEmptyState(),
           composer: {
             ...defaultChooseGroupMembersComposerState,
-            selectedConversationIds: times(1000, () => generateUuid()),
+            selectedConversationIds: times(1000, () => crypto.randomUUID()),
           },
         };
-        const action = getAction(generateUuid(), state);
+        const action = getAction(crypto.randomUUID(), state);
         const result = reducer(state, action);
 
         assert.deepEqual(result, state);
@@ -2122,7 +2122,7 @@ describe('both/state/ducks/conversations', () => {
             ...getEmptyState(),
             composer: defaultChooseGroupMembersComposerState,
           };
-          const action = getAction(generateUuid(), state);
+          const action = getAction(crypto.randomUUID(), state);
 
           assert.strictEqual(action.payload.maxGroupSize, 1001);
         }
@@ -2146,7 +2146,7 @@ describe('both/state/ducks/conversations', () => {
           ...getEmptyState(),
           composer: defaultChooseGroupMembersComposerState,
         };
-        const action = getAction(generateUuid(), state);
+        const action = getAction(crypto.randomUUID(), state);
 
         assert.strictEqual(action.payload.maxGroupSize, 1235);
       });

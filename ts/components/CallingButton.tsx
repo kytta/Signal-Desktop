@@ -3,7 +3,6 @@
 
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-import { v4 as uuid } from 'uuid';
 import type { TooltipPlacement } from './Tooltip';
 import { Tooltip } from './Tooltip';
 import { Theme } from '../util/theme';
@@ -48,7 +47,7 @@ export function CallingButton({
   onMouseLeave,
   tooltipDirection,
 }: PropsType): JSX.Element {
-  const uniqueButtonId = useMemo(() => uuid(), []);
+  const uniqueButtonId = useMemo(() => crypto.randomUUID(), []);
 
   let classNameSuffix = '';
   let tooltipContent = '';

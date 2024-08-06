@@ -5,7 +5,6 @@ import type { Meta, StoryFn } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import React, { useState } from 'react';
 import casual from 'casual';
-import { v4 as generateUuid } from 'uuid';
 
 import type { PropsType } from './ProfileEditor';
 import enMessages from '../../_locales/en/messages.json';
@@ -49,7 +48,7 @@ export default {
     aboutEmoji: '',
     aboutText: casual.sentence,
     profileAvatarUrl: undefined,
-    conversationId: generateUuid(),
+    conversationId: crypto.randomUUID(),
     color: getRandomColor(),
     deleteAvatarFromDisk: action('deleteAvatarFromDisk'),
     familyName: casual.last_name,

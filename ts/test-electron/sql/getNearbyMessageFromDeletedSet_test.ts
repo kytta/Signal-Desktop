@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -21,7 +21,7 @@ describe('sql/getNearbyMessageFromDeletedSet', () => {
     assert.lengthOf(await _getAllMessages(), 0);
 
     const now = Date.now();
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
 
     function getMessage(body: string, offset: number): MessageAttributesType {

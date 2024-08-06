@@ -11,7 +11,6 @@ import React, {
   useState,
 } from 'react';
 import { createPortal } from 'react-dom';
-import { v4 as uuid } from 'uuid';
 import { useIsMounted } from '../hooks/useIsMounted';
 import { CallReactionBurstEmoji } from './CallReactionBurstEmoji';
 
@@ -89,7 +88,7 @@ export function CallReactionBurstProvider({
 
   const showBurst = useCallback(
     (burst: CallReactionBurstType): string => {
-      const key = uuid();
+      const key = crypto.randomUUID();
 
       setBursts(state => {
         startTimer(key, LIFETIME);

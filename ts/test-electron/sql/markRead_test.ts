@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -37,11 +37,11 @@ describe('sql/markRead', () => {
 
     const start = Date.now();
     const readAt = start + 20;
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const oldest: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'incoming',
       conversationId,
@@ -51,7 +51,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Read,
     };
     const oldestUnread: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
@@ -61,17 +61,17 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Unread,
     };
     const unreadInAnotherConvo: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       sent_at: start + 3,
       received_at: start + 3,
       timestamp: start + 3,
       readStatus: ReadStatus.Unread,
     };
     const unread: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,
@@ -81,7 +81,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Unread,
     };
     const unreadStory: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5',
       type: 'story',
       conversationId,
@@ -89,10 +89,10 @@ describe('sql/markRead', () => {
       received_at: start + 5,
       timestamp: start + 5,
       readStatus: ReadStatus.Unread,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const unreadStoryReply: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 6',
       type: 'incoming',
       conversationId,
@@ -100,10 +100,10 @@ describe('sql/markRead', () => {
       received_at: start + 6,
       timestamp: start + 6,
       readStatus: ReadStatus.Unread,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const newestUnread: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 7',
       type: 'incoming',
       conversationId,
@@ -203,12 +203,12 @@ describe('sql/markRead', () => {
 
     const start = Date.now();
     const readAt = start + 20;
-    const conversationId = generateUuid();
-    const storyId = generateUuid();
+    const conversationId = crypto.randomUUID();
+    const storyId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'story',
       conversationId,
@@ -219,7 +219,7 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
@@ -230,7 +230,7 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
       conversationId,
@@ -238,10 +238,10 @@ describe('sql/markRead', () => {
       received_at: start + 3,
       timestamp: start + 3,
       readStatus: ReadStatus.Unread,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,
@@ -252,7 +252,7 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message5: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5',
       type: 'incoming',
       conversationId,
@@ -260,10 +260,10 @@ describe('sql/markRead', () => {
       received_at: start + 5,
       timestamp: start + 5,
       readStatus: ReadStatus.Unread,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message6: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 6',
       type: 'incoming',
       conversationId,
@@ -271,10 +271,10 @@ describe('sql/markRead', () => {
       received_at: start + 6,
       timestamp: start + 6,
       readStatus: ReadStatus.Unread,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message7: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 7',
       type: 'incoming',
       conversationId,
@@ -329,12 +329,12 @@ describe('sql/markRead', () => {
 
     const start = Date.now();
     const readAt = start + 20;
-    const conversationId = generateUuid();
+    const conversationId = crypto.randomUUID();
     const expireTimer = DurationInSeconds.fromSeconds(15);
     const ourAci = generateAci();
 
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'incoming',
       conversationId,
@@ -346,7 +346,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Read,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
@@ -357,10 +357,10 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Read,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       sent_at: start + 3,
       received_at: start + 3,
       timestamp: start + 3,
@@ -368,7 +368,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Unread,
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,
@@ -379,7 +379,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Unread,
     };
     const message5: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5',
       type: 'incoming',
       conversationId,
@@ -451,13 +451,13 @@ describe('sql/markRead', () => {
     assert.lengthOf(await _getAllReactions(), 0);
 
     const start = Date.now();
-    const conversationId = generateUuid();
-    const storyId = generateUuid();
+    const conversationId = crypto.randomUUID();
+    const storyId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const pad: Array<MessageAttributesType> = Array.from({ length: 4 }, _ => {
       return {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'pad message',
         type: 'incoming',
         conversationId,
@@ -467,7 +467,7 @@ describe('sql/markRead', () => {
       };
     });
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'incoming',
       conversationId,
@@ -476,7 +476,7 @@ describe('sql/markRead', () => {
       timestamp: start + 1,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
@@ -486,16 +486,16 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       sent_at: start + 3,
       received_at: start + 3,
       timestamp: start + 3,
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,
@@ -504,7 +504,7 @@ describe('sql/markRead', () => {
       timestamp: start + 4,
     };
     const message5: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5',
       type: 'incoming',
       conversationId,
@@ -525,7 +525,7 @@ describe('sql/markRead', () => {
     const reaction1: ReactionType = {
       conversationId,
       emoji: '🎉',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message1.id,
       messageReceivedAt: message1.received_at,
       targetAuthorAci: generateAci(),
@@ -535,7 +535,7 @@ describe('sql/markRead', () => {
     const reaction2: ReactionType = {
       conversationId,
       emoji: '🚀',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message2.id,
       messageReceivedAt: message2.received_at,
       targetAuthorAci: generateAci(),
@@ -543,9 +543,9 @@ describe('sql/markRead', () => {
       timestamp: start,
     };
     const reaction3: ReactionType = {
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       emoji: '☀️',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message3.id,
       messageReceivedAt: message3.received_at,
       targetAuthorAci: generateAci(),
@@ -555,7 +555,7 @@ describe('sql/markRead', () => {
     const reaction4: ReactionType = {
       conversationId,
       emoji: '❤️‍🔥',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message4.id,
       messageReceivedAt: message4.received_at,
       targetAuthorAci: generateAci(),
@@ -565,7 +565,7 @@ describe('sql/markRead', () => {
     const reaction5: ReactionType = {
       conversationId,
       emoji: '🆒',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message5.id,
       messageReceivedAt: message5.received_at,
       targetAuthorAci: generateAci(),
@@ -616,12 +616,12 @@ describe('sql/markRead', () => {
     assert.lengthOf(await _getAllReactions(), 0);
 
     const start = Date.now();
-    const conversationId = generateUuid();
-    const storyId = generateUuid();
+    const conversationId = crypto.randomUUID();
+    const storyId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'incoming',
       conversationId,
@@ -631,26 +631,26 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
       sent_at: start + 2,
       received_at: start + 2,
       timestamp: start + 2,
-      storyId: generateUuid(),
+      storyId: crypto.randomUUID(),
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       sent_at: start + 3,
       received_at: start + 3,
       timestamp: start + 3,
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,
@@ -660,7 +660,7 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message5: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 5',
       type: 'incoming',
       conversationId,
@@ -679,7 +679,7 @@ describe('sql/markRead', () => {
     const reaction1: ReactionType = {
       conversationId,
       emoji: '🎉',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message1.id,
       messageReceivedAt: message1.received_at,
       targetAuthorAci: generateAci(),
@@ -689,7 +689,7 @@ describe('sql/markRead', () => {
     const reaction2: ReactionType = {
       conversationId,
       emoji: '🚀',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message2.id,
       messageReceivedAt: message2.received_at,
       targetAuthorAci: generateAci(),
@@ -697,9 +697,9 @@ describe('sql/markRead', () => {
       timestamp: start,
     };
     const reaction3: ReactionType = {
-      conversationId: generateUuid(),
+      conversationId: crypto.randomUUID(),
       emoji: '☀️',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message3.id,
       messageReceivedAt: message3.received_at,
       targetAuthorAci: generateAci(),
@@ -709,7 +709,7 @@ describe('sql/markRead', () => {
     const reaction4: ReactionType = {
       conversationId,
       emoji: '❤️‍🔥',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message4.id,
       messageReceivedAt: message4.received_at,
       targetAuthorAci: generateAci(),
@@ -719,7 +719,7 @@ describe('sql/markRead', () => {
     const reaction5: ReactionType = {
       conversationId,
       emoji: '🆒',
-      fromId: generateUuid(),
+      fromId: crypto.randomUUID(),
       messageId: message5.id,
       messageReceivedAt: message5.received_at,
       targetAuthorAci: generateAci(),
@@ -773,12 +773,12 @@ describe('sql/markRead', () => {
 
     const start = Date.now();
     const readAt = start + 20;
-    const conversationId = generateUuid();
-    const storyId = generateUuid();
+    const conversationId = crypto.randomUUID();
+    const storyId = crypto.randomUUID();
     const ourAci = generateAci();
 
     const message1: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 1',
       type: 'story',
       conversationId,
@@ -788,7 +788,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Read,
     };
     const message2: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 2',
       type: 'incoming',
       conversationId,
@@ -799,7 +799,7 @@ describe('sql/markRead', () => {
       storyId,
     };
     const message3: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 3',
       type: 'incoming',
       conversationId,
@@ -809,7 +809,7 @@ describe('sql/markRead', () => {
       readStatus: ReadStatus.Unread,
     };
     const message4: MessageAttributesType = {
-      id: generateUuid(),
+      id: crypto.randomUUID(),
       body: 'message 4',
       type: 'incoming',
       conversationId,

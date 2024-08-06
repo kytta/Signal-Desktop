@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import { createReadStream, unlinkSync, writeFileSync } from 'fs';
-import { v4 as generateGuid } from 'uuid';
+
 import { join } from 'path';
 import { pipeline } from 'stream/promises';
 import { Transform } from 'stream';
@@ -73,7 +73,7 @@ describe('ContactsParser', () => {
 
       try {
         const bytes = getTestBuffer();
-        const fileName = generateGuid();
+        const fileName = crypto.randomUUID();
         absolutePath = join(tempDir, fileName);
         writeFileSync(absolutePath, bytes);
 
@@ -99,7 +99,7 @@ describe('ContactsParser', () => {
           getTestBuffer(),
         ]);
 
-        const fileName = generateGuid();
+        const fileName = crypto.randomUUID();
         absolutePath = join(tempDir, fileName);
         writeFileSync(absolutePath, bytes);
 
@@ -133,7 +133,7 @@ describe('ContactsParser', () => {
           getTestBuffer(),
         ]);
 
-        const fileName = generateGuid();
+        const fileName = crypto.randomUUID();
         absolutePath = join(tempDir, fileName);
         writeFileSync(absolutePath, bytes);
 

@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: AGPL-3.0-only
 
 import { assert } from 'chai';
-import { v4 as generateUuid } from 'uuid';
+
 
 import { DataReader, DataWriter } from '../../sql/Client';
 import { generateAci } from '../../types/ServiceId';
@@ -31,12 +31,12 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -45,7 +45,7 @@ describe('sql/timelineFetches', () => {
         timestamp: now - 20,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -54,16 +54,16 @@ describe('sql/timelineFetches', () => {
         timestamp: now - 10,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
       };
       const message4: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 4',
         type: 'story',
         conversationId,
@@ -73,7 +73,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message5: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 5',
         type: 'outgoing',
         conversationId,
@@ -107,12 +107,12 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story',
         type: 'story',
         conversationId,
@@ -122,7 +122,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story reply 1',
         type: 'outgoing',
         conversationId,
@@ -132,7 +132,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'normal message',
         type: 'outgoing',
         conversationId,
@@ -162,12 +162,12 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story',
         type: 'incoming',
         conversationId,
@@ -177,7 +177,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story reply 1',
         type: 'outgoing',
         conversationId,
@@ -187,7 +187,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'normal message',
         type: 'outgoing',
         conversationId,
@@ -217,11 +217,11 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -230,7 +230,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target - 10,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -239,7 +239,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -271,11 +271,11 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -284,7 +284,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -293,7 +293,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -329,11 +329,11 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -342,7 +342,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -351,7 +351,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -387,21 +387,21 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
-        conversationId: generateUuid(),
+        conversationId: crypto.randomUUID(),
         sent_at: now,
         received_at: now,
         timestamp: now,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'story',
         conversationId,
@@ -411,7 +411,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -421,7 +421,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message4: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 4',
         type: 'outgoing',
         conversationId,
@@ -430,7 +430,7 @@ describe('sql/timelineFetches', () => {
         timestamp: now + 10,
       };
       const message5: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 5',
         type: 'outgoing',
         conversationId,
@@ -462,12 +462,12 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const now = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'story',
         conversationId,
@@ -477,7 +477,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -487,7 +487,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -518,11 +518,11 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -531,7 +531,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target - 10,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -540,7 +540,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -572,21 +572,21 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
         sent_at: target - 10,
         received_at: target - 10,
         timestamp: target - 10,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -595,14 +595,14 @@ describe('sql/timelineFetches', () => {
         timestamp: target + 20,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
         sent_at: target + 10,
         received_at: target + 10,
         timestamp: target + 10,
-        storyId: generateUuid(),
+        storyId: crypto.randomUUID(),
       };
 
       await saveMessages([message1, message2, message3], {
@@ -628,11 +628,11 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const message1: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 1',
         type: 'outgoing',
         conversationId,
@@ -641,7 +641,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message2: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 2',
         type: 'outgoing',
         conversationId,
@@ -650,7 +650,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target,
       };
       const message3: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'message 3',
         type: 'outgoing',
         conversationId,
@@ -687,12 +687,12 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
-      const storyId = generateUuid();
+      const conversationId = crypto.randomUUID();
+      const storyId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const story: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'story',
         type: 'story',
         conversationId,
@@ -701,7 +701,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target - 10,
       };
       const oldestInStory: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'oldestInStory',
         type: 'outgoing',
         conversationId,
@@ -711,7 +711,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const oldest: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'oldest',
         type: 'outgoing',
         conversationId,
@@ -720,7 +720,7 @@ describe('sql/timelineFetches', () => {
         timestamp: target - 8,
       };
       const oldestUnseen: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'oldestUnseen',
         type: 'incoming',
         conversationId,
@@ -730,7 +730,7 @@ describe('sql/timelineFetches', () => {
         readStatus: ReadStatus.Unread,
       };
       const oldestStoryUnread: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'oldestStoryUnread',
         type: 'incoming',
         conversationId,
@@ -741,7 +741,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const anotherUnread: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'anotherUnread',
         type: 'incoming',
         conversationId,
@@ -751,7 +751,7 @@ describe('sql/timelineFetches', () => {
         readStatus: ReadStatus.Unread,
       };
       const newestInStory: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'newestStory',
         type: 'outgoing',
         conversationId,
@@ -761,7 +761,7 @@ describe('sql/timelineFetches', () => {
         storyId,
       };
       const newest: MessageAttributesType = {
-        id: generateUuid(),
+        id: crypto.randomUUID(),
         body: 'newest',
         type: 'outgoing',
         conversationId,
@@ -828,7 +828,7 @@ describe('sql/timelineFetches', () => {
       assert.lengthOf(await _getAllMessages(), 0);
 
       const target = Date.now();
-      const conversationId = generateUuid();
+      const conversationId = crypto.randomUUID();
       const ourAci = generateAci();
 
       const readMentionsMe: Partial<MessageAttributesType> = {
@@ -861,7 +861,7 @@ describe('sql/timelineFetches', () => {
       const formattedMessages = messages.map<MessageAttributesType>(
         (message, idx) => {
           return {
-            id: generateUuid(),
+            id: crypto.randomUUID(),
             body: 'body',
             type: 'incoming',
             sent_at: target - messages.length + idx,

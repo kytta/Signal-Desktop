@@ -3,7 +3,7 @@
 
 import { assert } from 'chai';
 import * as sinon from 'sinon';
-import { v4 as uuid } from 'uuid';
+
 import { RowType } from '../../../components/ConversationList';
 import { FindDirection } from '../../../components/leftPane/LeftPaneHelper';
 import { getDefaultConversation } from '../../../test-both/helpers/getDefaultConversation';
@@ -95,7 +95,7 @@ describe('LeftPaneArchiveHelper', () => {
         ],
       });
 
-      assert.isUndefined(helper.getRowIndexToScrollTo(uuid()));
+      assert.isUndefined(helper.getRowIndexToScrollTo(crypto.randomUUID()));
     });
 
     it("returns the archived conversation's index", () => {

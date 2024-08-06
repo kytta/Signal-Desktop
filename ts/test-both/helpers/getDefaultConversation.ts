@@ -3,7 +3,7 @@
 
 import casual from 'casual';
 import { sample } from 'lodash';
-import { v4 as generateUuid } from 'uuid';
+
 
 import type { ConversationType } from '../../state/ducks/conversations';
 import type { ServiceIdString } from '../../types/ServiceId';
@@ -34,7 +34,7 @@ export function getDefaultConversation(
     conversationColor: ConversationColors[0],
     color: getRandomColor(),
     firstName,
-    id: generateUuid(),
+    id: crypto.randomUUID(),
     isMe: false,
     lastUpdated: casual.unix_time,
     markedUnread: Boolean(overrideProps.markedUnread),
@@ -77,10 +77,10 @@ export function getDefaultGroup(
     color: getRandomColor(),
     conversationColor: ConversationColors[0],
     groupDescription: casual.sentence,
-    groupId: generateUuid(),
+    groupId: crypto.randomUUID(),
     groupLink: casual.url,
     groupVersion: 2,
-    id: generateUuid(),
+    id: crypto.randomUUID(),
     isMe: false,
     lastUpdated: casual.unix_time,
     markedUnread: Boolean(overrideProps.markedUnread),
