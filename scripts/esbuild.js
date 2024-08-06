@@ -3,7 +3,7 @@
 
 const esbuild = require('esbuild');
 const path = require('path');
-const glob = require('glob');
+const fg = require('fast-glob');
 
 const ROOT_DIR = path.join(__dirname, '..');
 const BUNDLES_DIR = 'bundles';
@@ -98,17 +98,17 @@ async function build({ appConfig, preloadConfig }) {
 }
 
 async function main() {
+  const entryPoints = await fg('{app,ts}/**/*.{ts,tsx}', {
+    cwd: ROOT_DIR,
+    ignore: '*.d.ts',
+  });
+
   await build({
     appConfig: {
       ...nodeDefaults,
       format: 'cjs',
       mainFields: ['browser', 'main'],
-      entryPoints: glob
-        .sync('{app,ts}/**/*.{ts,tsx}', {
-          nodir: true,
-          root: ROOT_DIR,
-        })
-        .filter(file => !file.endsWith('.d.ts')),
+      entryPoints,
       outdir: path.join(ROOT_DIR),
     },
     preloadConfig: {
